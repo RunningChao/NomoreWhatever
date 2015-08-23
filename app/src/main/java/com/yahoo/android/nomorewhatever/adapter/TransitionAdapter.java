@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.yahoo.android.nomorewhatever;
+package com.yahoo.android.nomorewhatever.adapter;
 
 import android.transition.Transition;
 

@@ -1,4 +1,4 @@
-package com.yahoo.android.nomorewhatever;
+package com.yahoo.android.nomorewhatever.model;
 
 import android.content.Context;
 

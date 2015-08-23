@@ -1,10 +1,15 @@
-package com.yahoo.android.nomorewhatever;
+package com.yahoo.android.nomorewhatever.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+
+import com.yahoo.android.nomorewhatever.R;
+import com.yahoo.android.nomorewhatever.adapter.PlaceTypeListAdapter;
 
 
 public class MainActivity extends Activity {
@@ -12,10 +17,22 @@ public class MainActivity extends Activity {
   private Menu menu;
   private boolean isListView;
 
+  private RecyclerView mRecyclerView;
+  private StaggeredGridLayoutManager mStaggeredLayoutManager;
+
+  private PlaceTypeListAdapter mAdapter;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
+
+    mRecyclerView = (RecyclerView) findViewById(R.id.list);
+    mStaggeredLayoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
+    mRecyclerView.setLayoutManager(mStaggeredLayoutManager);
+
+    mAdapter = new PlaceTypeListAdapter(this);
+    mRecyclerView.setAdapter(mAdapter);
 
     isListView = true;
   }

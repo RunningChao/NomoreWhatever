@@ -1,4 +1,4 @@
-package com.yahoo.android.nomorewhatever;
+package com.yahoo.android.nomorewhatever.activity;
 
 import android.app.Activity;
 import android.content.Context;
@@ -16,6 +16,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.yahoo.android.nomorewhatever.model.Place;
+import com.yahoo.android.nomorewhatever.model.PlaceData;
+import com.yahoo.android.nomorewhatever.R;
 
 import java.util.ArrayList;
 
