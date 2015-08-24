@@ -1,4 +1,4 @@
-package nomorewhatever.android.yahoo.com.nomorewhatever;
+package com.yahoo.android.nomorewhatever;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

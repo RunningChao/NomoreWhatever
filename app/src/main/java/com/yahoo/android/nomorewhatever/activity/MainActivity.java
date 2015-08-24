@@ -42,7 +42,7 @@ public class MainActivity extends Activity {
       @Override
       public void onItemClick(View view, int position) {
         Toast.makeText(MainActivity.this, "Clicked " + position, Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(MainActivity.this, DetailActivity.class);
+        Intent intent = new Intent(MainActivity.this, PlaceDetailActivity.class);
         intent.putExtra(DetailActivity.EXTRA_PARAM_ID, position);
         startActivity(intent);
       }
