@@ -41,7 +41,8 @@
         </activity>
         <activity
             android:name=".activity.PlaceDetailActivity"
-            android:label="@string/title_activity_place_detail" >
+            android:label="@string/title_activity_place_detail"
+	    android:theme="@style/DetailTheme" >
         </activity>
     </application>
 

@@ -8,8 +8,10 @@
     android:layout_margin="8dp"
     card_view:cardCornerRadius="@dimen/card_corner_radius"
     card_view:cardElevation="@dimen/card_elevation">
-
+    <com.yahoo.android.nomorewhatever.ui.CardFrameLayout
+        style="@style/Card">
     <ImageView
+        style="@style/CardPhoto"
         android:id="@+id/placeImage"
         android:layout_width="match_parent"
         android:layout_height="200dp"
@@ -31,6 +33,7 @@
         android:orientation="horizontal">
 
         <TextView
+            style="@style/CardTitle"
             android:id="@+id/placeName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -41,5 +44,5 @@
             android:textColor="@android:color/white" />
 
     </LinearLayout>
-
+</com.yahoo.android.nomorewhatever.ui.CardFrameLayout>
 </android.support.v7.widget.CardView>

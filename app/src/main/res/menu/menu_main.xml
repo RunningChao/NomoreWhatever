@@ -5,7 +5,7 @@
   <item
     android:id="@+id/action_toggle"
     android:icon="@drawable/ic_action_grid"
-    android:showAsAction="always"
+    android:showAsAction="never"
     android:orderInCategory="100"
     android:title="Show as grid" />
 

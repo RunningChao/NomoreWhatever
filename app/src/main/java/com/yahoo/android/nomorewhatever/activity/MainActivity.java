@@ -1,6 +1,7 @@
 package com.yahoo.android.nomorewhatever.activity;
 
 import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
@@ -37,21 +38,30 @@ public class MainActivity extends Activity {
     mAdapter = new PlaceTypeListAdapter(this);
     mRecyclerView.setAdapter(mAdapter);
 
-    mAdapter.setOnItemClickListener( new PlaceTypeListAdapter.OnItemClickListener(){
+    mAdapter.setOnItemClickListener(new PlaceTypeListAdapter.OnItemClickListener() {
 
       @Override
       public void onItemClick(View view, int position) {
         Toast.makeText(MainActivity.this, "Clicked " + position, Toast.LENGTH_SHORT).show();
+
+
+
+
         Intent intent = new Intent(MainActivity.this, PlaceDetailActivity.class);
         intent.putExtra(DetailActivity.EXTRA_PARAM_ID, position);
-        startActivity(intent);
+
+        ActivityOptions options =
+                ActivityOptions.makeSceneTransitionAnimation(MainActivity.this, view, "photo_hero");
+        startActivity(intent, options.toBundle());
       }
-    } );
+    });
 
     isListView = true;
   }
 
-
+  public void showPhoto(View view) {
+    Toast.makeText(MainActivity.this, "Clicked " + view.getId(), Toast.LENGTH_SHORT).show();
+  }
 
 
   private void setUpActionBar() {

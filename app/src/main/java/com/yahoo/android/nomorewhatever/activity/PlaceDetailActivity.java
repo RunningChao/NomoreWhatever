@@ -45,7 +45,7 @@ public class PlaceDetailActivity extends Activity {
         setContentView(R.layout.activity_place_detail);
 
         //
-        //Bitmap photo = setupPhoto(getIntent().getIntExtra("photo", R.drawable.photo1));
+        //Bitmap photo = setupPhoto(getIntent().getIntExtra("photo", R.drawable.canada));
         mPlace = PlaceData.placeList().get(getIntent().getIntExtra(EXTRA_PARAM_ID, 0));
         Bitmap photo = BitmapFactory.decodeResource(getResources(), mPlace.getImageResourceId(this));
         photo = setupPhoto(photo);
