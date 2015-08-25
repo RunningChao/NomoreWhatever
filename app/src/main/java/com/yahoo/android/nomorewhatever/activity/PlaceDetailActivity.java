@@ -105,21 +105,21 @@ public class PlaceDetailActivity extends Activity {
         //Palette.Swatch swatch = palette.getVibrantSwatch();
         //int rgbcolor = swatch.getRgb();
 
-        getWindow().setBackgroundDrawable(new ColorDrawable(palette.getDarkMutedSwatch().getRgb()));
+        getWindow().setBackgroundDrawable(new ColorDrawable(palette.getDarkMutedColor(0x000000)));
 
         TextView titleView = (TextView) findViewById(R.id.title);
-        titleView.setTextColor(palette.getVibrantSwatch().getRgb());
+        titleView.setTextColor(palette.getVibrantColor(0x000000));
 
         TextView descriptionView = (TextView) findViewById(R.id.description);
-        descriptionView.setTextColor(palette.getLightVibrantSwatch().getRgb());
+        descriptionView.setTextColor(palette.getLightVibrantColor(0x000000));
 
-        colorRipple(R.id.info, palette.getDarkMutedSwatch().getRgb(),
-                palette.getDarkVibrantSwatch().getRgb());
-        colorRipple(R.id.star, palette.getMutedSwatch().getRgb(),
-                palette.getVibrantSwatch().getRgb());
+        colorRipple(R.id.info, palette.getDarkMutedColor(0x000000), palette.getDarkVibrantColor(0x000000));
+        colorRipple(R.id.star, palette.getMutedColor(0x000000), palette.getVibrantColor(0x000000));
 
         View infoView = findViewById(R.id.information_container);
-        infoView.setBackgroundColor(palette.getLightMutedSwatch().getRgb());
+        infoView.setBackgroundColor(palette.getLightMutedColor(0x000000));
+
+
     }
 
     private void colorRipple(int id, int bgColor, int tintColor) {
