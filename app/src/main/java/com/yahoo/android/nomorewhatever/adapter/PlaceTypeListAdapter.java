@@ -14,8 +14,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.yahoo.android.nomorewhatever.R;
-import com.yahoo.android.nomorewhatever.model.Place;
-import com.yahoo.android.nomorewhatever.model.PlaceData;
+import com.yahoo.android.nomorewhatever.model.PlaceType;
 
 /**
  * Created by andychw on 8/23/15.
@@ -37,7 +36,7 @@ public class PlaceTypeListAdapter extends RecyclerView.Adapter<PlaceTypeListAdap
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        final Place place = new PlaceData().placeList().get(position);
+        final PlaceType place = PlaceType.getPlaceTypes(20).get(position);
 
         holder.placeName.setText(place.name);
         Picasso.with(mContext).load(place.getImageResourceId(mContext)).into(holder.placeImage);
@@ -54,7 +53,7 @@ public class PlaceTypeListAdapter extends RecyclerView.Adapter<PlaceTypeListAdap
 
     @Override
     public int getItemCount() {
-        return new PlaceData().placeList().size();
+        return PlaceType.getPlaceTypes(20).size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {

@@ -2,16 +2,40 @@ package com.yahoo.android.nomorewhatever.model;
 
 import android.content.Context;
 
-public class Place {
+import com.activeandroid.Model;
+import com.activeandroid.annotation.Column;
+import com.activeandroid.annotation.Table;
+import com.activeandroid.query.Select;
 
+import java.io.Serializable;
+
+@Table(name = "Places")
+public class Place extends Model implements Serializable {
+  @Column(name = "place_id", unique = true, onUniqueConflict = Column.ConflictAction.REPLACE)
   public long placeId;
+
+  @Column(name = "name")
   public String name;
+
+  @Column(name = "image_name")
   public String imageName;
+
+  @Column(name = "is_fav")
   public boolean isFav;
+
+  @Column(name = "lat")
   public double lat;
+
+  @Column(name = "lng")
   public double lng;
+
+  @Column(name = "zoom")
   public String zoom;
+
+  @Column(name = "desciption")
   public String desciption;
+
+  @Column(name = "photo_url")
   public String photoURL;
 
 
@@ -83,4 +107,9 @@ public class Place {
   public int getImageResourceId(Context context) {
     return context.getResources().getIdentifier(this.imageName, "drawable", context.getPackageName());
   }
+
+  public static Place getPlace( long uid) {
+    return new Select().from(Place.class).where("place_id=?" ,uid).executeSingle();
+  }
+
 }
