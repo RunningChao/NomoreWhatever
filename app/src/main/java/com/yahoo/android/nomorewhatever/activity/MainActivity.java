@@ -1,19 +1,23 @@
 package com.yahoo.android.nomorewhatever.activity;
 
 import android.app.Activity;
-import android.app.ActivityOptions;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.yahoo.android.nomorewhatever.R;
 import com.yahoo.android.nomorewhatever.adapter.PlaceTypeListAdapter;
+import com.yahoo.android.nomorewhatever.model.PlaceType;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainActivity extends Activity {
@@ -22,9 +26,12 @@ public class MainActivity extends Activity {
   private boolean isListView;
 
   private RecyclerView mRecyclerView;
+  private Button mConfirmBtn;
   private StaggeredGridLayoutManager mStaggeredLayoutManager;
 
   private PlaceTypeListAdapter mAdapter;
+
+  private List<PlaceType> mPlaces;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -32,12 +39,34 @@ public class MainActivity extends Activity {
     setContentView(R.layout.activity_main);
 
     mRecyclerView = (RecyclerView) findViewById(R.id.list);
-    mStaggeredLayoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
+    mConfirmBtn = (Button) findViewById(R.id.btn_confirm);
+    mStaggeredLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
     mRecyclerView.setLayoutManager(mStaggeredLayoutManager);
 
-    mAdapter = new PlaceTypeListAdapter(this);
+    //
+    mPlaces = PlaceType.getPlaceTypes(20);
+    for(int i = 0 ; i < mPlaces.size() ; i ++){
+      mPlaces.get(i).setIsFav(false);
+      mPlaces.get(i).save();
+    }
+    mAdapter = new PlaceTypeListAdapter(mPlaces, this);
     mRecyclerView.setAdapter(mAdapter);
 
+    mConfirmBtn.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        ArrayList<PlaceType> selectedPlaces = new ArrayList<PlaceType>();
+
+        for(int i= 0; i < mPlaces.size(); i++){
+          if(mPlaces.get(i).isFav()){
+            selectedPlaces.add(mPlaces.get(i));
+          }
+        }
+        Log.e("size", "size" + selectedPlaces.size());
+      }
+    });
+
+    /*
     mAdapter.setOnItemClickListener(new PlaceTypeListAdapter.OnItemClickListener() {
 
       @Override
@@ -52,6 +81,7 @@ public class MainActivity extends Activity {
         startActivity(intent, options.toBundle());
       }
     });
+    */
 
     isListView = true;
   }

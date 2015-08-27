@@ -30,7 +30,7 @@
             android:value="NoMoreWhatever.db" />
         <meta-data
             android:name="AA_DB_VERSION"
-            android:value="3" />
+            android:value="4" />
 
         <activity
             android:name=".activity.MainActivity"

@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,8 @@ import com.squareup.picasso.Picasso;
 import com.yahoo.android.nomorewhatever.R;
 import com.yahoo.android.nomorewhatever.model.PlaceType;
 
+import java.util.List;
+
 /**
  * Created by andychw on 8/23/15.
  */
@@ -23,8 +26,12 @@ public class PlaceTypeListAdapter extends RecyclerView.Adapter<PlaceTypeListAdap
 
     Context mContext;
     OnItemClickListener mItemClickListener;
+    private List<PlaceType> mPlaceTypes;
 
-    public PlaceTypeListAdapter(Context mContext) {
+
+
+    public PlaceTypeListAdapter(List<PlaceType> mPlaceTypes, Context mContext) {
+        this.mPlaceTypes = mPlaceTypes;
         this.mContext = mContext;
     }
 
@@ -36,9 +43,10 @@ public class PlaceTypeListAdapter extends RecyclerView.Adapter<PlaceTypeListAdap
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        final PlaceType place = PlaceType.getPlaceTypes(20).get(position);
+        final PlaceType place = mPlaceTypes.get(position);
 
         holder.placeName.setText(place.name);
+        holder.mSelectedIv.setVisibility(mPlaceTypes.get(position).isFav()? View.VISIBLE : View.GONE);
         Picasso.with(mContext).load(place.getImageResourceId(mContext)).into(holder.placeImage);
 
         Bitmap photo = BitmapFactory.decodeResource(mContext.getResources(), place.getImageResourceId(mContext));
@@ -61,6 +69,7 @@ public class PlaceTypeListAdapter extends RecyclerView.Adapter<PlaceTypeListAdap
         public LinearLayout placeNameHolder;
         public TextView placeName;
         public ImageView placeImage;
+        public ImageView mSelectedIv;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -68,6 +77,7 @@ public class PlaceTypeListAdapter extends RecyclerView.Adapter<PlaceTypeListAdap
             placeName = (TextView) itemView.findViewById(R.id.placeName);
             placeNameHolder = (LinearLayout) itemView.findViewById(R.id.placeNameHolder);
             placeImage = (ImageView) itemView.findViewById(R.id.placeImage);
+            mSelectedIv = (ImageView) itemView.findViewById(R.id.iv_select);
             placeHolder.setOnClickListener(this);
         }
 
@@ -76,8 +86,17 @@ public class PlaceTypeListAdapter extends RecyclerView.Adapter<PlaceTypeListAdap
             if (mItemClickListener != null) {
                 mItemClickListener.onItemClick(itemView, getPosition());
             }
+
+
+            Log.e("isFav", mPlaceTypes.get(getPosition()).isFav() + " : before" + " " + getPosition());
+            boolean isFav = !mPlaceTypes.get(getPosition()).isFav();
+            mPlaceTypes.get(getPosition()).setIsFav(isFav);
+            mPlaceTypes.get(getPosition()).save();
+            mSelectedIv.setVisibility(isFav ? View.VISIBLE : View.GONE);
+            Log.e("isFav", mPlaceTypes.get(getPosition()).isFav() + " : after");
         }
     }
+
     public interface OnItemClickListener {
         void onItemClick(View view, int position);
     }
@@ -85,5 +104,7 @@ public class PlaceTypeListAdapter extends RecyclerView.Adapter<PlaceTypeListAdap
     public void setOnItemClickListener(final OnItemClickListener mItemClickListener) {
         this.mItemClickListener = mItemClickListener;
     }
+
+
 
 }

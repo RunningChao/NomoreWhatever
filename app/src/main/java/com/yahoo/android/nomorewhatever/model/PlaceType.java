@@ -1,6 +1,7 @@
 package com.yahoo.android.nomorewhatever.model;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
@@ -29,7 +30,7 @@ public class PlaceType extends Model implements Serializable{
     public String photoURL;
 
     @Column(name = "isFav")
-    public boolean isFav;
+    private boolean isFav;
 
     public PlaceType() {
 
@@ -81,6 +82,7 @@ public class PlaceType extends Model implements Serializable{
     }
 
     public void setIsFav(boolean isFav) {
+        Log.e("set", "setMe");
         this.isFav = isFav;
     }
 
@@ -90,5 +92,7 @@ public class PlaceType extends Model implements Serializable{
                 .limit(retrieveNumbers);
         return sql.execute();
     }
+
+
 
 }
