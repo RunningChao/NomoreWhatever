@@ -24,14 +24,14 @@
             android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyA5k2s03Q7iqwGhBQv83ubjtWtxmjH5w5Y" />
+            android:value="AIzaSyCNtxd639be1o4vQ7jf-_n8-9ZbH3GTuw8" />
 
         <meta-data
             android:name="AA_DB_NAME"
             android:value="NoMoreWhatever.db" />
         <meta-data
             android:name="AA_DB_VERSION"
-            android:value="3" />
+            android:value="4" />
 
         <activity
             android:name=".activity.MainActivity"
