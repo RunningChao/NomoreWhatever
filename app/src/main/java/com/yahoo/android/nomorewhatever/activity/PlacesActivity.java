@@ -2,10 +2,15 @@ package com.yahoo.android.nomorewhatever.activity;
 
 import android.app.Activity;
 import android.app.ActivityOptions;
+import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -13,10 +18,14 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.yahoo.android.nomorewhatever.R;
-import com.yahoo.android.nomorewhatever.adapter.PlaceTypeListAdapter;
+import com.yahoo.android.nomorewhatever.adapter.PlacesAdapter;
+import com.yahoo.android.nomorewhatever.model.Place;
+
+import java.util.LinkedList;
+import java.util.List;
 
 
-public class PlacesActivity extends Activity {
+public class PlacesActivity extends Activity implements LocationListener {
 
     private boolean isListView;
     private Menu menu;
@@ -24,21 +33,40 @@ public class PlacesActivity extends Activity {
     private RecyclerView mRecyclerView;
     private StaggeredGridLayoutManager mStaggeredLayoutManager;
 
-    private PlaceTypeListAdapter mAdapter;
+    private PlacesAdapter mAdapter;
+
+    private List<Place> mPlaces;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_places);
 
+
+        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+
+
         mRecyclerView = (RecyclerView) findViewById(R.id.list);
         mStaggeredLayoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(mStaggeredLayoutManager);
 
-        mAdapter = new PlaceTypeListAdapter(this);
+        Place p = new Place();
+        p.setName("TAMAMA");
+        p.setImageName("borabora");
+        p.setIsFav(false);
+        List<Place> list = new LinkedList<>();
+        list.add(p);
+        mPlaces = list;
+        //mPlaces = Place.getPlace(1); //mock
+        for (int i = 0; i < mPlaces.size(); i++) {
+            mPlaces.get(i).setIsFav(false);
+            //mPlaces.get(i).save();
+        }
+        mAdapter = new PlacesAdapter(mPlaces, this);
         mRecyclerView.setAdapter(mAdapter);
 
-        mAdapter.setOnItemClickListener(new PlaceTypeListAdapter.OnItemClickListener() {
+        mAdapter.setOnItemClickListener(new PlacesAdapter.OnItemClickListener() {
 
             @Override
             public void onItemClick(View view, int position) {
@@ -96,5 +124,29 @@ public class PlacesActivity extends Activity {
             item.setTitle("Show as grid");
             isListView = true;
         }
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        int latitude = (int) (location.getLatitude());
+        int longitude = (int) (location.getLongitude());
+
+        Log.i("Geo_Location", "Latitude: " + latitude + ", Longitude: " + longitude);
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+
+        Log.d("Latitude","status");
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+        Log.d("Latitude","enable");
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+        Log.d("Latitude","disable");
     }
 }
