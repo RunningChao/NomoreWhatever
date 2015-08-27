@@ -12,8 +12,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.activeandroid.ActiveAndroid;
+import com.activeandroid.Configuration;
+import com.activeandroid.Model;
 import com.yahoo.android.nomorewhatever.R;
 import com.yahoo.android.nomorewhatever.adapter.PlaceTypeListAdapter;
+import com.yahoo.android.nomorewhatever.model.Place;
+import com.yahoo.android.nomorewhatever.model.PlaceType;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainActivity extends Activity {

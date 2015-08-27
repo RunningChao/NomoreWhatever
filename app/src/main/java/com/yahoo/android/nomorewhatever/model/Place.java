@@ -4,7 +4,9 @@ import android.content.Context;
 
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
+import com.activeandroid.annotation.Column.ForeignKeyAction;
 import com.activeandroid.annotation.Table;
+
 import com.activeandroid.query.Select;
 
 import java.io.Serializable;
@@ -37,6 +39,9 @@ public class Place extends Model implements Serializable {
 
   @Column(name = "photo_url")
   public String photoURL;
+
+  @Column(name = "place_type", onUpdate = ForeignKeyAction.CASCADE, onDelete = ForeignKeyAction.CASCADE)
+  public PlaceType placeType;
 
 
 
@@ -106,6 +111,14 @@ public class Place extends Model implements Serializable {
 
   public int getImageResourceId(Context context) {
     return context.getResources().getIdentifier(this.imageName, "drawable", context.getPackageName());
+  }
+
+  public PlaceType getPlaceType() {
+    return placeType;
+  }
+
+  public void setPlaceType(PlaceType placeType) {
+    this.placeType = placeType;
   }
 
   public static Place getPlace( long uid) {
