@@ -13,7 +13,7 @@ public class PlaceData {
       place.name = placeNameArray[i];
       place.imageName = placeNameArray[i].replaceAll("\\s+", "").toLowerCase();
       if (i == 2 || i == 5) {
-        place.isFav = true;
+        place.setIsFav(true);
       }
 
       list.add(place);

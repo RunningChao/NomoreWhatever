@@ -44,5 +44,11 @@
             android:textColor="@android:color/white" />
 
     </LinearLayout>
+        <ImageView
+            android:id="@+id/iv_select"
+            android:src="@drawable/common_signin_btn_icon_disabled_dark"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content" />
 </com.yahoo.android.nomorewhatever.ui.CardFrameLayout>
 </android.support.v7.widget.CardView>
