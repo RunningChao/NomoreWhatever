@@ -109,7 +109,7 @@ public class Place extends Model implements Serializable {
   }
 
   public static Place getPlace( long uid) {
-    return new Select().from(Place.class).where("place_id=?" ,uid).executeSingle();
+    return new Select().from(Place.class).where("place_id=?", uid).executeSingle();
   }
 
 }
