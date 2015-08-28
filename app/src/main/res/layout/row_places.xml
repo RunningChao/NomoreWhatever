@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:id="@+id/placeCard"
     android:layout_width="match_parent"
@@ -8,49 +7,70 @@
     android:layout_margin="4dp"
     card_view:cardCornerRadius="@dimen/card_corner_radius"
     card_view:cardElevation="@dimen/card_elevation">
-    <com.yahoo.android.nomorewhatever.ui.CardFrameLayout
-        style="@style/Card">
-    <ImageView
-        style="@style/CardPhoto"
-        android:id="@+id/placeImage"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:scaleType="centerCrop" />
 
-    <!-- Used for the ripple effect on touch -->
-    <LinearLayout
-        android:id="@+id/mainHolder"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="?android:selectableItemBackground"
-        android:orientation="horizontal" />
-
-    <LinearLayout
-        android:id="@+id/placeNameHolder"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_gravity="bottom"
-        android:orientation="horizontal">
-
-        <TextView
-            style="@style/CardTitle"
-            android:id="@+id/placeName"
+    <com.yahoo.android.nomorewhatever.ui.CardFrameLayout style="@style/Card">
+        <ImageView
+            android:id="@+id/placeImage"
+            style="@style/CardPhoto"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:gravity="left"
-            android:paddingLeft="10dp"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@android:color/white" />
+            android:layout_height="200dp"
+            android:scaleType="centerCrop" />
 
-    </LinearLayout>
+        <!-- Used for the ripple effect on touch -->
+        <LinearLayout
+            android:id="@+id/mainHolder"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="?android:selectableItemBackground"
+            android:orientation="horizontal" />
+
+        <LinearLayout
+            android:id="@+id/placeNameHolder"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_gravity="bottom"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/placeName"
+                style="@style/CardTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:gravity="left"
+                android:paddingLeft="10dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@android:color/white" />
+
+
+        </LinearLayout>
+
+        <LinearLayout android:id="@+id/detailHolder"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_gravity="bottom"
+            android:orientation="vertical" >
+
+            <Button
+                android:id="@+id/btn_detail"
+                android:layout_marginTop="10px"
+                android:layout_marginRight="10px"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center|right"
+                android:background="@drawable/detail"
+                />
+        </LinearLayout>
+
         <ImageView
             android:id="@+id/iv_select"
-            android:src="@drawable/checkbox_marked_circle_outline"
             android:layout_width="wrap_content"
-            android:layout_gravity="center"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:contentDescription="@string/selected"
-            android:foregroundGravity="center_vertical" />
-</com.yahoo.android.nomorewhatever.ui.CardFrameLayout>
+            android:foregroundGravity="center_vertical"
+            android:src="@drawable/checkbox_marked_circle_outline" />
+
+
+    </com.yahoo.android.nomorewhatever.ui.CardFrameLayout>
 </android.support.v7.widget.CardView>

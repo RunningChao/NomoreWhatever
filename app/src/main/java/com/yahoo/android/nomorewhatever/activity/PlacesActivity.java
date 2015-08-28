@@ -1,9 +1,7 @@
 package com.yahoo.android.nomorewhatever.activity;
 
 import android.app.Activity;
-import android.app.ActivityOptions;
 import android.content.Context;
-import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -14,8 +12,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
 
 import com.yahoo.android.nomorewhatever.R;
 import com.yahoo.android.nomorewhatever.adapter.PlacesAdapter;
@@ -51,13 +47,6 @@ public class PlacesActivity extends Activity implements LocationListener {
         mStaggeredLayoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(mStaggeredLayoutManager);
 
-//        Place p = new Place();
-//        p.setName("TAMAMA");
-//        p.setImageName("borabora");
-//        p.setIsFav(false);
-//        p.save();
-//        List<Place> list = new LinkedList<>();
-//        list.add(p);
         mPlaces = PlaceData.placeList();
         //mPlaces = Place.getPlace(1); //mock
         for (int i = 0; i < mPlaces.size(); i++) {
@@ -67,20 +56,20 @@ public class PlacesActivity extends Activity implements LocationListener {
         mAdapter = new PlacesAdapter(mPlaces, this);
         mRecyclerView.setAdapter(mAdapter);
 
-        mAdapter.setOnItemClickListener(new PlacesAdapter.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(View view, int position) {
-                Toast.makeText(PlacesActivity.this, "Clicked " + position, Toast.LENGTH_SHORT).show();
-
-                Intent intent = new Intent(PlacesActivity.this, PlaceDetailActivity.class);
-                intent.putExtra(PlaceDetailActivity.EXTRA_PARAM_ID, position);
-
-                ActivityOptions options =
-                        ActivityOptions.makeSceneTransitionAnimation(PlacesActivity.this, view, "photo_hero");
-                startActivity(intent, options.toBundle());
-            }
-        });
+//        mAdapter.setOnItemClickListener(new PlacesAdapter.OnItemClickListener() {
+//
+//            @Override
+//            public void onItemClick(View view, int position) {
+//                Toast.makeText(PlacesActivity.this, "Clicked " + position, Toast.LENGTH_SHORT).show();
+//
+//                Intent intent = new Intent(PlacesActivity.this, PlaceDetailActivity.class);
+//                intent.putExtra(PlaceDetailActivity.EXTRA_PARAM_ID, position);
+//
+//                ActivityOptions options =
+//                        ActivityOptions.makeSceneTransitionAnimation(PlacesActivity.this, view, "photo_hero");
+//                startActivity(intent, options.toBundle());
+//            }
+//        });
 
         isListView = true;
     }

@@ -1,6 +1,9 @@
 package com.yahoo.android.nomorewhatever.adapter;
 
+import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v7.graphics.Palette;
@@ -9,12 +12,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.yahoo.android.nomorewhatever.R;
+import com.yahoo.android.nomorewhatever.activity.PlaceDetailActivity;
 import com.yahoo.android.nomorewhatever.model.Place;
 
 import java.util.List;
@@ -31,13 +36,11 @@ public class PlacesAdapter extends RecyclerView.Adapter<PlacesAdapter.ViewHolder
     public PlacesAdapter(List<Place> mPlaces, Context mContext) {
         this.mPlaces = mPlaces;
         this.mContext = mContext;
-
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_places, parent, false);
-        Log.d("Debug", "ffffffffffffffffff2");
         return new ViewHolder(view);
     }
 
@@ -56,6 +59,30 @@ public class PlacesAdapter extends RecyclerView.Adapter<PlacesAdapter.ViewHolder
                 holder.placeNameHolder.setBackgroundColor(mutedLight);
             }
         });
+
+
+
+        holder.mDetailButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Log.d("Debug", String.valueOf(position));
+                Log.d("Debug", "hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+                Context context = v.getContext();
+                Log.d("Debug", "hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee1");
+                //Toast.makeText(context, "Clicked " + position, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(context, PlaceDetailActivity.class);
+                Log.d("Debug", "hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee2");
+                intent.putExtra(PlaceDetailActivity.EXTRA_PARAM_ID, position);
+                Log.d("Debug", "hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee3");
+
+                ActivityOptions options =
+                        ActivityOptions.makeSceneTransitionAnimation((Activity) context, v, "photo_hero");
+                Log.d("Debug", "hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee4");
+                ((Activity) context).startActivity(intent, options.toBundle());
+                Log.d("Debug", "hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee5");
+            }
+        });
     }
 
     @Override
@@ -70,6 +97,7 @@ public class PlacesAdapter extends RecyclerView.Adapter<PlacesAdapter.ViewHolder
         public TextView placeName;
         public ImageView placeImage;
         public ImageView mSelectedIv;
+        public Button mDetailButton;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -80,6 +108,7 @@ public class PlacesAdapter extends RecyclerView.Adapter<PlacesAdapter.ViewHolder
             placeImage = (ImageView) itemView.findViewById(R.id.placeImage);
             mSelectedIv = (ImageView) itemView.findViewById(R.id.iv_select);
             placeHolder.setOnClickListener(this);
+            mDetailButton = (Button) itemView.findViewById(R.id.btn_detail);
         }
 
         @Override
