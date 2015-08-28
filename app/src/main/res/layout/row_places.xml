@@ -5,7 +5,7 @@
     android:id="@+id/placeCard"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
+    android:layout_margin="4dp"
     card_view:cardCornerRadius="@dimen/card_corner_radius"
     card_view:cardElevation="@dimen/card_elevation">
     <com.yahoo.android.nomorewhatever.ui.CardFrameLayout
@@ -46,9 +46,11 @@
     </LinearLayout>
         <ImageView
             android:id="@+id/iv_select"
-            android:src="@drawable/common_signin_btn_icon_disabled_dark"
+            android:src="@drawable/checkbox_marked_circle_outline"
             android:layout_width="wrap_content"
             android:layout_gravity="center"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/selected"
+            android:foregroundGravity="center_vertical" />
 </com.yahoo.android.nomorewhatever.ui.CardFrameLayout>
 </android.support.v7.widget.CardView>

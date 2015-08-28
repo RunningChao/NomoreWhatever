@@ -10,112 +10,125 @@ import com.activeandroid.annotation.Table;
 import com.activeandroid.query.Select;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Table(name = "Places")
 public class Place extends Model implements Serializable {
-  @Column(name = "place_id", unique = true, onUniqueConflict = Column.ConflictAction.REPLACE)
-  public long placeId;
+    @Column(name = "place_id", unique = true, onUniqueConflict = Column.ConflictAction.REPLACE)
+    public long placeId;
 
-  @Column(name = "name")
-  public String name;
+    @Column(name = "name")
+    public String name;
 
-  @Column(name = "image_name")
-  public String imageName;
+    @Column(name = "image_name")
+    public String imageName;
 
-  @Column(name = "is_fav")
-  public boolean isFav;
+    @Column(name = "is_fav")
+    public boolean isFav;
 
-  @Column(name = "lat")
-  public double lat;
+    @Column(name = "lat")
+    public double lat;
 
-  @Column(name = "lng")
-  public double lng;
+    @Column(name = "lng")
+    public double lng;
 
-  @Column(name = "zoom")
-  public String zoom;
+    @Column(name = "zoom")
+    public String zoom;
 
-  @Column(name = "desciption")
-  public String desciption;
+    @Column(name = "desciption")
+    public String desciption;
 
-  @Column(name = "photo_url")
-  public String photoURL;
+    @Column(name = "photo_url")
+    public String photoURL;
 
+<<<<<<< HEAD
   @Column(name = "phone")
   public String phone;
 
   @Column(name = "place_type", onUpdate = ForeignKeyAction.CASCADE, onDelete = ForeignKeyAction.CASCADE)
   public PlaceType placeType;
+=======
+    @Column(name = "place_type", onUpdate = ForeignKeyAction.CASCADE, onDelete = ForeignKeyAction.CASCADE)
+    public PlaceType placeType;
+>>>>>>> 1c576e1fd1ce0c9765baf5993ada51a6ca3dd835
 
+    public Place(String name) {
+        this.name = name;
+    }
 
+    public String getName() {
+        return name;
+    }
 
-  public String getName() {
-    return name;
-  }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-  public void setName(String name) {
-    this.name = name;
-  }
+    public String getImageName() {
+        return imageName;
+    }
 
-  public String getImageName() {
-    return imageName;
-  }
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
+    }
 
-  public void setImageName(String imageName) {
-    this.imageName = imageName;
-  }
+    public boolean isFav() {
+        return isFav;
+    }
 
-  public boolean isFav() {
-    return isFav;
-  }
+    public void setIsFav(boolean isFav) {
+        this.isFav = isFav;
+    }
 
-  public void setIsFav(boolean isFav) {
-    this.isFav = isFav;
-  }
+    public double getLat() {
+        return lat;
+    }
 
-  public double getLat() {
-    return lat;
-  }
+    public void setLat(double lat) {
+        this.lat = lat;
+    }
 
-  public void setLat(double lat) {
-    this.lat = lat;
-  }
+    public double getLng() {
+        return lng;
+    }
 
-  public double getLng() {
-    return lng;
-  }
+    public void setLng(double lng) {
+        this.lng = lng;
+    }
 
-  public void setLng(double lng) {
-    this.lng = lng;
-  }
+    public String getZoom() {
+        return zoom;
+    }
 
-  public String getZoom() {
-    return zoom;
-  }
+    public void setZoom(String zoom) {
+        this.zoom = zoom;
+    }
 
-  public void setZoom(String zoom) {
-    this.zoom = zoom;
-  }
+    public String getDesciption() {
+        return desciption;
+    }
 
-  public String getDesciption() {
-    return desciption;
-  }
+    public void setDesciption(String desciption) {
+        this.desciption = desciption;
+    }
 
-  public void setDesciption(String desciption) {
-    this.desciption = desciption;
-  }
+    public String getPhotoURL() {
+        return photoURL;
+    }
 
-  public String getPhotoURL() {
-    return photoURL;
-  }
+    public void setPhotoURL(String photoURL) {
+        this.photoURL = photoURL;
+    }
 
-  public void setPhotoURL(String photoURL) {
-    this.photoURL = photoURL;
-  }
+    public int getImageResourceId(Context context) {
+        return context.getResources().getIdentifier(this.imageName, "drawable", context.getPackageName());
+    }
 
-  public int getImageResourceId(Context context) {
-    return context.getResources().getIdentifier(this.imageName, "drawable", context.getPackageName());
-  }
+    public PlaceType getPlaceType() {
+        return placeType;
+    }
 
+<<<<<<< HEAD
   public String getPhone() {
     return phone;
   }
@@ -127,13 +140,17 @@ public class Place extends Model implements Serializable {
   public PlaceType getPlaceType() {
     return placeType;
   }
+=======
+    public void setPlaceType(PlaceType placeType) {
+        this.placeType = placeType;
+    }
+>>>>>>> 1c576e1fd1ce0c9765baf5993ada51a6ca3dd835
 
-  public void setPlaceType(PlaceType placeType) {
-    this.placeType = placeType;
-  }
+    public static List<Place> getPlace(long uid) {
+        return new Select().from(Place.class).where("place_id=?", uid).execute();
+    }
 
-  public static Place getPlace( long uid) {
-    return new Select().from(Place.class).where("place_id=?" ,uid).executeSingle();
-  }
-
+    public static int getPlaceCount(long uid) {
+        return new Select().from(Place.class).where("place_id=?", uid).execute().size();
+    }
 }

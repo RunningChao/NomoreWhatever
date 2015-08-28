@@ -8,4 +8,6 @@
   <string name="star_button_description">Fave this photo</string>
   <string name="photo_description">Photo</string>
     <string name="title_activity_place_detail">PlaceDetailActivity</string>
+    <string name="title_activity_places">PlacesActivity</string>
+  <string name="selected">selected</string>
 </resources>
