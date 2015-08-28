@@ -60,7 +60,8 @@ public class PlacesAdapter extends RecyclerView.Adapter<PlacesAdapter.ViewHolder
 
     @Override
     public int getItemCount() {
-        return Place.getPlaceCount(1);
+        //return Place.getPlaceCount(1);
+        return 10;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {

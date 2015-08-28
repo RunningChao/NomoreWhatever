@@ -32,13 +32,13 @@ import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.yahoo.android.nomorewhatever.R;
+import com.yahoo.android.nomorewhatever.model.Place;
 import com.yahoo.android.nomorewhatever.model.PlaceData;
-import com.yahoo.android.nomorewhatever.model.PlaceType;
 import com.yahoo.android.nomorewhatever.ui.TransitionAdapter;
 
 public class PlaceDetailActivity extends Activity {
     public static final String EXTRA_PARAM_ID = "place_id";
-    private PlaceType mPlace;
+    private Place mPlace;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

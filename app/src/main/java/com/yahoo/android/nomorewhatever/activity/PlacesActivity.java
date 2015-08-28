@@ -20,8 +20,8 @@ import android.widget.Toast;
 import com.yahoo.android.nomorewhatever.R;
 import com.yahoo.android.nomorewhatever.adapter.PlacesAdapter;
 import com.yahoo.android.nomorewhatever.model.Place;
+import com.yahoo.android.nomorewhatever.model.PlaceData;
 
-import java.util.LinkedList;
 import java.util.List;
 
 
@@ -51,14 +51,14 @@ public class PlacesActivity extends Activity implements LocationListener {
         mStaggeredLayoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(mStaggeredLayoutManager);
 
-        Place p = new Place();
-        p.setName("TAMAMA");
-        p.setImageName("borabora");
-        p.setIsFav(false);
-        p.save();
-        List<Place> list = new LinkedList<>();
-        list.add(p);
-        mPlaces = list;
+//        Place p = new Place();
+//        p.setName("TAMAMA");
+//        p.setImageName("borabora");
+//        p.setIsFav(false);
+//        p.save();
+//        List<Place> list = new LinkedList<>();
+//        list.add(p);
+        mPlaces = PlaceData.placeList();
         //mPlaces = Place.getPlace(1); //mock
         for (int i = 0; i < mPlaces.size(); i++) {
             mPlaces.get(i).setIsFav(false);

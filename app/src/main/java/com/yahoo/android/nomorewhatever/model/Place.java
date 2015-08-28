@@ -44,6 +44,9 @@ public class Place extends Model implements Serializable {
     @Column(name = "place_type", onUpdate = ForeignKeyAction.CASCADE, onDelete = ForeignKeyAction.CASCADE)
     public PlaceType placeType;
 
+    public Place(String name) {
+        this.name = name;
+    }
 
     public String getName() {
         return name;
