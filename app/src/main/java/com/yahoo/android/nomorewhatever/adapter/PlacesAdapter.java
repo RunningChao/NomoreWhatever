@@ -61,26 +61,14 @@ public class PlacesAdapter extends RecyclerView.Adapter<PlacesAdapter.ViewHolder
         });
 
 
-
         holder.mDetailButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Log.d("Debug", String.valueOf(position));
-                Log.d("Debug", "hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
                 Context context = v.getContext();
-                Log.d("Debug", "hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee1");
-                //Toast.makeText(context, "Clicked " + position, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(context, PlaceDetailActivity.class);
-                Log.d("Debug", "hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee2");
                 intent.putExtra(PlaceDetailActivity.EXTRA_PARAM_ID, position);
-                Log.d("Debug", "hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee3");
-
-                ActivityOptions options =
-                        ActivityOptions.makeSceneTransitionAnimation((Activity) context, v, "photo_hero");
-                Log.d("Debug", "hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee4");
+                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation((Activity) context, v, "photo_hero");
                 ((Activity) context).startActivity(intent, options.toBundle());
-                Log.d("Debug", "hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee5");
             }
         });
     }

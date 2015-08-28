@@ -98,6 +98,11 @@ public class PlacesActivity extends Activity implements LocationListener {
             return true;
         }
 
+        if (id == R.id.action_toggle) {
+            toggle();
+            return true;
+        }
+
         return super.onOptionsItemSelected(item);
     }
 
