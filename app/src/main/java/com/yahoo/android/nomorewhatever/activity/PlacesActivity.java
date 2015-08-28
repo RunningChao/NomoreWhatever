@@ -42,10 +42,10 @@ public class PlacesActivity extends Activity implements LocationListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_places);
 
-
+        /* gps testing*/
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
-
+        /* gps testing*/
 
         mRecyclerView = (RecyclerView) findViewById(R.id.list);
         mStaggeredLayoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
@@ -55,6 +55,7 @@ public class PlacesActivity extends Activity implements LocationListener {
         p.setName("TAMAMA");
         p.setImageName("borabora");
         p.setIsFav(false);
+        p.save();
         List<Place> list = new LinkedList<>();
         list.add(p);
         mPlaces = list;

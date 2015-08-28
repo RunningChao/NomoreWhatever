@@ -37,6 +37,7 @@ public class PlacesAdapter extends RecyclerView.Adapter<PlacesAdapter.ViewHolder
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_places, parent, false);
+        Log.d("Debug", "ffffffffffffffffff2");
         return new ViewHolder(view);
     }
 
@@ -71,7 +72,7 @@ public class PlacesAdapter extends RecyclerView.Adapter<PlacesAdapter.ViewHolder
 
         public ViewHolder(View itemView) {
             super(itemView);
-            Log.d("debug", "ffffffffffffffffff2");
+
             placeHolder = (LinearLayout) itemView.findViewById(R.id.mainHolder);
             placeName = (TextView) itemView.findViewById(R.id.placeName);
             placeNameHolder = (LinearLayout) itemView.findViewById(R.id.placeNameHolder);
