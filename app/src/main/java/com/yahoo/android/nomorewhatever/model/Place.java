@@ -40,6 +40,9 @@ public class Place extends Model implements Serializable {
   @Column(name = "photo_url")
   public String photoURL;
 
+  @Column(name = "phone")
+  public String phone;
+
   @Column(name = "place_type", onUpdate = ForeignKeyAction.CASCADE, onDelete = ForeignKeyAction.CASCADE)
   public PlaceType placeType;
 
@@ -111,6 +114,14 @@ public class Place extends Model implements Serializable {
 
   public int getImageResourceId(Context context) {
     return context.getResources().getIdentifier(this.imageName, "drawable", context.getPackageName());
+  }
+
+  public String getPhone() {
+    return phone;
+  }
+
+  public void setPhone(String phone) {
+    this.phone = phone;
   }
 
   public PlaceType getPlaceType() {
