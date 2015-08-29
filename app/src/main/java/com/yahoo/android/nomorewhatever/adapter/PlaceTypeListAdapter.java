@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -22,12 +23,11 @@ import java.util.List;
 /**
  * Created by andychw on 8/23/15.
  */
-public class PlaceTypeListAdapter extends RecyclerView.Adapter<PlaceTypeListAdapter.ViewHolder>  {
+public class PlaceTypeListAdapter extends RecyclerView.Adapter<PlaceTypeListAdapter.ViewHolder> {
 
     Context mContext;
     OnItemClickListener mItemClickListener;
     private List<PlaceType> mPlaceTypes;
-
 
 
     public PlaceTypeListAdapter(List<PlaceType> mPlaceTypes, Context mContext) {
@@ -37,7 +37,7 @@ public class PlaceTypeListAdapter extends RecyclerView.Adapter<PlaceTypeListAdap
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_places,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_places, parent, false);
         return new ViewHolder(view);
     }
 
@@ -46,7 +46,7 @@ public class PlaceTypeListAdapter extends RecyclerView.Adapter<PlaceTypeListAdap
         final PlaceType place = mPlaceTypes.get(position);
 
         holder.placeName.setText(place.name);
-        holder.mSelectedIv.setVisibility(mPlaceTypes.get(position).isFav()? View.VISIBLE : View.GONE);
+        holder.mSelectedIv.setVisibility(mPlaceTypes.get(position).isFav() ? View.VISIBLE : View.GONE);
         Picasso.with(mContext).load(place.getImageResourceId(mContext)).into(holder.placeImage);
 
         Bitmap photo = BitmapFactory.decodeResource(mContext.getResources(), place.getImageResourceId(mContext));
@@ -70,6 +70,7 @@ public class PlaceTypeListAdapter extends RecyclerView.Adapter<PlaceTypeListAdap
         public TextView placeName;
         public ImageView placeImage;
         public ImageView mSelectedIv;
+        public Button mDetailButton;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -79,6 +80,8 @@ public class PlaceTypeListAdapter extends RecyclerView.Adapter<PlaceTypeListAdap
             placeImage = (ImageView) itemView.findViewById(R.id.placeImage);
             mSelectedIv = (ImageView) itemView.findViewById(R.id.iv_select);
             placeHolder.setOnClickListener(this);
+            mDetailButton = (Button) itemView.findViewById(R.id.btn_detail);
+            mDetailButton.setVisibility(View.GONE);
         }
 
         @Override
@@ -104,7 +107,6 @@ public class PlaceTypeListAdapter extends RecyclerView.Adapter<PlaceTypeListAdap
     public void setOnItemClickListener(final OnItemClickListener mItemClickListener) {
         this.mItemClickListener = mItemClickListener;
     }
-
 
 
 }

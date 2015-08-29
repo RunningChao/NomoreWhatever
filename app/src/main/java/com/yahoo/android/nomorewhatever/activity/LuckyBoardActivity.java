@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.yahoo.android.nomorewhatever.R;
@@ -17,13 +17,13 @@ import java.util.List;
 
 public class LuckyBoardActivity extends Activity {
 
-    private ImageView mStartBtn;
+    private Button mStartBtn;
     private LuckyPanView mLuckyPanView;
 
     private List<Place> mPlaces;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lucky_board);
 
@@ -41,7 +41,7 @@ public class LuckyBoardActivity extends Activity {
             }
         });
 
-        mStartBtn = (ImageView) findViewById(R.id.id_start_btn);
+        mStartBtn = (Button) findViewById(R.id.id_start_btn);
         mStartBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -50,11 +50,18 @@ public class LuckyBoardActivity extends Activity {
                     // TODO :change icon layout here
                     // mStartBtn.setImageResource(R.drawable.stop);
                     mLuckyPanView.luckyStart((int) Math.floor(Math.random() * 6));
+                    mStartBtn.setText("Stop!");
                 } else {
                     if (!mLuckyPanView.isShouldEnd()) {
                         // mStartBtn.setImageResource(R.drawable.start);
                         mLuckyPanView.luckyEnd();
                     }
+                    try {
+                        Thread.sleep(3000); // wait animation stop
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    mStartBtn.setText("TRY AGAIN!");
                 }
             }
         });

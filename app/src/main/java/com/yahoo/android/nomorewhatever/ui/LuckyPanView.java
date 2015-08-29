@@ -50,46 +50,50 @@ public class LuckyPanView extends SurfaceView implements SurfaceHolder.Callback,
      */
     private int mItemCount = 6;
 
-
+    private String[] mStrs = new String[mItemCount];    //抽獎的文字
     /**
-     * 抽奖的文字
+     * 与文字对应的图片 todo: 換張圖吧
      */
-    private String[] mStrs = new String[mItemCount];
-//    private String[] mStrs = new String[] {
-//            "单反相机", "IPAD", "恭喜发财", "IPHONE",
-//            "妹子一只"//, "恭喜发财"
+    private int[] mImgs = new int[]{
+            R.drawable.abc_btn_radio_to_on_mtrl_015, R.drawable.abc_btn_radio_to_on_mtrl_015,
+            R.drawable.abc_btn_radio_to_on_mtrl_015, R.drawable.abc_btn_radio_to_on_mtrl_015,
+            R.drawable.abc_btn_radio_to_on_mtrl_015, R.drawable.abc_btn_radio_to_on_mtrl_015
+    };
+//    private int[] mImgs = new int[mItemCount];          //抽獎的文字對應的图片
+//    private int[] mColors = new int[mItemCount];        //抽獎的文字對應的顏色
+
+//    private int[] COLOR_ENUM = new int[] {
+//            0xFFFFC300, 0xFFF17E01, 0xFFFFFF00,
+//            0x00000001, 0xFFFFC300, 0xFFF17E01
 //    };
 
-    public void setPlacesonBoard(List<Place> places){
+    /**
+     * 每个盘块的颜色
+     */
+    private int[] mColors = new int[]{
+            0xFFFFC300, 0xFFF17E01, 0xFFFFC300,
+            0xFFF17E01, 0xFFFFC300, 0xFFF17E01
+    };
+
+    public void setPlacesonBoard(List<Place> places) {
         Log.d("Debug", String.valueOf(places.size()));
-        for(int i =0;i<places.size();i++){
-            mStrs[i]=places.get(i).getName();
+        for (int i = 0; i < places.size(); i++) {
+            mStrs[i] = places.get(i).getName();
+            //mImgs[i]=places.get(i).getImageResourceId(getContext());
+            //mColors[i]=COLOR_ENUM[i];
         }
-        if(places.size()<mItemCount){
-            for(int i =places.size();i<mItemCount;i++){
+        if (places.size() < mItemCount) {
+            for (int i = places.size(); i < mItemCount; i++) {
                 Random r = new Random();
                 int index = r.nextInt(places.size()) + 0;
-                mStrs[i]=places.get(index).getName();
+                mStrs[i] = places.get(index).getName();
+                //mImgs[i]=places.get(index).getImageResourceId(getContext());
+                //mColors[i]=COLOR_ENUM[index];
             }
         }
 
     }
 
-    /**
-     * 每个盘块的颜色
-     */
-    private int[] mColors = new int[] {
-            0xFFFFC300, 0xFFF17E01, 0xFFFFC300,
-            0xFFF17E01, 0xFFFFC300, 0xFFF17E01
-    };
-    /**
-     * 与文字对应的图片
-     */
-    private int[] mImgs = new int[] {
-            R.drawable.abc_btn_radio_to_on_mtrl_015, R.drawable.abc_btn_radio_to_on_mtrl_015,
-            R.drawable.abc_btn_radio_to_on_mtrl_015, R.drawable.abc_btn_radio_to_on_mtrl_015,
-            R.drawable.abc_btn_radio_to_on_mtrl_015, R.drawable.abc_btn_radio_to_on_mtrl_015
-    };
 
     /**
      * 与文字对应图片的bitmap数组
@@ -157,8 +161,7 @@ public class LuckyPanView extends SurfaceView implements SurfaceHolder.Callback,
     private float mTextSize = TypedValue.applyDimension(
             TypedValue.COMPLEX_UNIT_SP, 20, getResources().getDisplayMetrics());
 
-    public LuckyPanView(Context context)
-    {
+    public LuckyPanView(Context context) {
         this(context, null);
     }
 
@@ -221,7 +224,7 @@ public class LuckyPanView extends SurfaceView implements SurfaceHolder.Callback,
 
     @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width,
-            int height) {
+                               int height) {
 
     }
 
@@ -343,7 +346,7 @@ public class LuckyPanView extends SurfaceView implements SurfaceHolder.Callback,
      */
     private void drawIcon(float startAngle, int i) {
         // 设置图片的宽度为直径的1/8
-        int imgWidth = mRadius / 8;
+        int imgWidth = mRadius / 6;
 
         float angle = (float) ((30 + startAngle) * (Math.PI / 180));
 
