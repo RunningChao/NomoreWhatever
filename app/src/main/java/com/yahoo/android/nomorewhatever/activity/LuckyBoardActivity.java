@@ -1,6 +1,7 @@
 package com.yahoo.android.nomorewhatever.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -9,20 +10,30 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.yahoo.android.nomorewhatever.R;
+import com.yahoo.android.nomorewhatever.model.Place;
 import com.yahoo.android.nomorewhatever.ui.LuckyPanView;
+
+import java.util.List;
 
 public class LuckyBoardActivity extends Activity {
 
     private ImageView mStartBtn;
     private LuckyPanView mLuckyPanView;
 
+    private List<Place> mPlaces;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lucky_board);
 
+        Intent intent = getIntent();
+        mPlaces = (List<Place>) intent.getSerializableExtra("selected_places");
+
         mLuckyPanView = (LuckyPanView) findViewById(R.id.id_luckypan);
+        mLuckyPanView.setPlacesonBoard(mPlaces);
+
+
         mLuckyPanView.setListener(new LuckyPanView.onClickLuckyPanListener() {
             @Override
             public void onClickLuckyPan(int luckyId) {

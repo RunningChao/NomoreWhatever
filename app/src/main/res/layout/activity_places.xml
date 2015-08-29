@@ -6,7 +6,7 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/btn_confirm"
+        android:id="@+id/btn_lucky"
         android:layout_width="match_parent"
         android:text="Lucky GO!"
         android:layout_height="70dp" />

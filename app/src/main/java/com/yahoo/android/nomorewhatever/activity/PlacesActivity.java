@@ -13,6 +13,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import com.yahoo.android.nomorewhatever.R;
 import com.yahoo.android.nomorewhatever.adapter.PlacesAdapter;
@@ -34,6 +36,7 @@ public class PlacesActivity extends Activity implements LocationListener {
 
     private List<Place> mPlaces;
     private ArrayList<Long> mPlaceTypeIds;
+    private Button mLuckyButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,31 +61,32 @@ public class PlacesActivity extends Activity implements LocationListener {
 
         mPlaces = Place.getPlacesByType(mPlaceTypeIds);
 
-        //mPlaces = PlaceData.placeList();
-        //mPlaces = Place.getPlace(1); //mock
         for (int i = 0; i < mPlaces.size(); i++) {
             mPlaces.get(i).setIsFav(false);
-            //mPlaces.get(i).save();
+            mPlaces.get(i).save();
         }
         mAdapter = new PlacesAdapter(mPlaces, this);
         mRecyclerView.setAdapter(mAdapter);
-
-//        mAdapter.setOnItemClickListener(new PlacesAdapter.OnItemClickListener() {
-//
-//            @Override
-//            public void onItemClick(View view, int position) {
-//                Toast.makeText(PlacesActivity.this, "Clicked " + position, Toast.LENGTH_SHORT).show();
-//
-//                Intent intent = new Intent(PlacesActivity.this, PlaceDetailActivity.class);
-//                intent.putExtra(PlaceDetailActivity.EXTRA_PARAM_ID, position);
-//
-//                ActivityOptions options =
-//                        ActivityOptions.makeSceneTransitionAnimation(PlacesActivity.this, view, "photo_hero");
-//                startActivity(intent, options.toBundle());
-//            }
-//        });
-
         isListView = true;
+
+
+        mLuckyButton=(Button)findViewById(R.id.btn_lucky);
+        mLuckyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ArrayList<Place> selectedPlacesIds = new ArrayList<>();
+                for (int i = 0; i < mPlaces.size(); i++) {
+                    if (mPlaces.get(i).isFav()) {
+                        selectedPlacesIds.add(mPlaces.get(i));
+
+                    }
+                }
+                Log.e("size", "size" + selectedPlacesIds.size());
+                Intent intent = new Intent(PlacesActivity.this, LuckyBoardActivity.class);
+                intent.putExtra("selected_places", selectedPlacesIds);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -143,16 +147,16 @@ public class PlacesActivity extends Activity implements LocationListener {
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras) {
 
-        Log.d("Latitude","status");
+        Log.d("Latitude", "status");
     }
 
     @Override
     public void onProviderEnabled(String provider) {
-        Log.d("Latitude","enable");
+        Log.d("Latitude", "enable");
     }
 
     @Override
     public void onProviderDisabled(String provider) {
-        Log.d("Latitude","disable");
+        Log.d("Latitude", "disable");
     }
 }
