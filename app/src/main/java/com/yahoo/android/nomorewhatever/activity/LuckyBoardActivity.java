@@ -50,11 +50,18 @@ public class LuckyBoardActivity extends Activity {
                     // TODO :change icon layout here
                     // mStartBtn.setImageResource(R.drawable.stop);
                     mLuckyPanView.luckyStart((int) Math.floor(Math.random() * 6));
+                    mStartBtn.setText("Stop!");
                 } else {
                     if (!mLuckyPanView.isShouldEnd()) {
                         // mStartBtn.setImageResource(R.drawable.start);
                         mLuckyPanView.luckyEnd();
                     }
+                    try {
+                        Thread.sleep(3000); // wait animation stop
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    mStartBtn.setText("TRY AGAIN!");
                 }
             }
         });
