@@ -2,6 +2,7 @@ package com.yahoo.android.nomorewhatever.activity;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -16,8 +17,8 @@ import android.view.MenuItem;
 import com.yahoo.android.nomorewhatever.R;
 import com.yahoo.android.nomorewhatever.adapter.PlacesAdapter;
 import com.yahoo.android.nomorewhatever.model.Place;
-import com.yahoo.android.nomorewhatever.model.PlaceData;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -32,6 +33,7 @@ public class PlacesActivity extends Activity implements LocationListener {
     private PlacesAdapter mAdapter;
 
     private List<Place> mPlaces;
+    private ArrayList<Long> mPlaceTypeIds;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +49,16 @@ public class PlacesActivity extends Activity implements LocationListener {
         mStaggeredLayoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(mStaggeredLayoutManager);
 
-        mPlaces = PlaceData.placeList();
+        Intent intent = getIntent();
+        mPlaceTypeIds = (ArrayList<Long>) intent.getSerializableExtra("selected_places");
+
+        for (Long placeTypeLongId : mPlaceTypeIds) {
+            Log.d("Debug", "id: " + placeTypeLongId);
+        }
+
+        mPlaces = Place.getPlacesByType(mPlaceTypeIds);
+
+        //mPlaces = PlaceData.placeList();
         //mPlaces = Place.getPlace(1); //mock
         for (int i = 0; i < mPlaces.size(); i++) {
             mPlaces.get(i).setIsFav(false);
