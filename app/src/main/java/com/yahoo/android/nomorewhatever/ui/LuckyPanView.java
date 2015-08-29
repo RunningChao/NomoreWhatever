@@ -10,6 +10,7 @@ import android.graphics.Path;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
@@ -17,6 +18,10 @@ import android.view.SurfaceView;
 import android.view.View;
 
 import com.yahoo.android.nomorewhatever.R;
+import com.yahoo.android.nomorewhatever.model.Place;
+
+import java.util.List;
+import java.util.Random;
 
 public class LuckyPanView extends SurfaceView implements SurfaceHolder.Callback, Runnable, View.OnTouchListener {
 
@@ -41,12 +46,35 @@ public class LuckyPanView extends SurfaceView implements SurfaceHolder.Callback,
     private boolean mIsClickOnTargetItem = false;
 
     /**
+     * 盘块的个数
+     */
+    private int mItemCount = 6;
+
+
+    /**
      * 抽奖的文字
      */
-    private String[] mStrs = new String[] {
-            "单反相机", "IPAD", "恭喜发财", "IPHONE",
-            "妹子一只", "恭喜发财"
-    };
+    private String[] mStrs = new String[mItemCount];
+//    private String[] mStrs = new String[] {
+//            "单反相机", "IPAD", "恭喜发财", "IPHONE",
+//            "妹子一只"//, "恭喜发财"
+//    };
+
+    public void setPlacesonBoard(List<Place> places){
+        Log.d("Debug", String.valueOf(places.size()));
+        for(int i =0;i<places.size();i++){
+            mStrs[i]=places.get(i).getName();
+        }
+        if(places.size()<mItemCount){
+            for(int i =places.size();i<mItemCount;i++){
+                Random r = new Random();
+                int index = r.nextInt(places.size()) + 0;
+                mStrs[i]=places.get(index).getName();
+            }
+        }
+
+    }
+
     /**
      * 每个盘块的颜色
      */
@@ -67,10 +95,6 @@ public class LuckyPanView extends SurfaceView implements SurfaceHolder.Callback,
      * 与文字对应图片的bitmap数组
      */
     private Bitmap[] mImgsBitmap;
-    /**
-     * 盘块的个数
-     */
-    private int mItemCount = 6;
 
     /**
      * TODO: refactor mStrs, mColors, mImgs and mItemCount
