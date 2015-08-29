@@ -41,16 +41,12 @@ public class Place extends Model implements Serializable {
     @Column(name = "photo_url")
     public String photoURL;
 
-<<<<<<< HEAD
-  @Column(name = "phone")
-  public String phone;
+    @Column(name = "phone")
+    public String phone;
 
-  @Column(name = "place_type", onUpdate = ForeignKeyAction.CASCADE, onDelete = ForeignKeyAction.CASCADE)
-  public PlaceType placeType;
-=======
     @Column(name = "place_type", onUpdate = ForeignKeyAction.CASCADE, onDelete = ForeignKeyAction.CASCADE)
     public PlaceType placeType;
->>>>>>> 1c576e1fd1ce0c9765baf5993ada51a6ca3dd835
+
 
     public Place(String name) {
         this.name = name;
@@ -124,27 +120,22 @@ public class Place extends Model implements Serializable {
         return context.getResources().getIdentifier(this.imageName, "drawable", context.getPackageName());
     }
 
-    public PlaceType getPlaceType() {
-        return placeType;
-    }
-
-<<<<<<< HEAD
-  public String getPhone() {
+    public String getPhone() {
     return phone;
   }
 
-  public void setPhone(String phone) {
+    public void setPhone(String phone) {
     this.phone = phone;
   }
 
-  public PlaceType getPlaceType() {
+    public PlaceType getPlaceType() {
     return placeType;
   }
-=======
+
     public void setPlaceType(PlaceType placeType) {
         this.placeType = placeType;
     }
->>>>>>> 1c576e1fd1ce0c9765baf5993ada51a6ca3dd835
+
 
     public static List<Place> getPlace(long uid) {
         return new Select().from(Place.class).where("place_id=?", uid).execute();
