@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.yahoo.android.nomorewhatever.R;
@@ -17,13 +17,13 @@ import java.util.List;
 
 public class LuckyBoardActivity extends Activity {
 
-    private ImageView mStartBtn;
+    private Button mStartBtn;
     private LuckyPanView mLuckyPanView;
 
     private List<Place> mPlaces;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lucky_board);
 
@@ -41,7 +41,7 @@ public class LuckyBoardActivity extends Activity {
             }
         });
 
-        mStartBtn = (ImageView) findViewById(R.id.id_start_btn);
+        mStartBtn = (Button) findViewById(R.id.id_start_btn);
         mStartBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
