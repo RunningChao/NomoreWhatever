@@ -6,10 +6,10 @@ import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Column.ForeignKeyAction;
 import com.activeandroid.annotation.Table;
-
 import com.activeandroid.query.Select;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Table(name = "Places")
@@ -41,8 +41,14 @@ public class Place extends Model implements Serializable {
     @Column(name = "photo_url")
     public String photoURL;
 
+    @Column(name = "phone")
+    public String phone;
+
     @Column(name = "place_type", onUpdate = ForeignKeyAction.CASCADE, onDelete = ForeignKeyAction.CASCADE)
     public PlaceType placeType;
+
+    public Place() {
+    }
 
     public Place(String name) {
         this.name = name;
@@ -116,13 +122,22 @@ public class Place extends Model implements Serializable {
         return context.getResources().getIdentifier(this.imageName, "drawable", context.getPackageName());
     }
 
+    public String getPhone() {
+    return phone;
+  }
+
+    public void setPhone(String phone) {
+    this.phone = phone;
+  }
+
     public PlaceType getPlaceType() {
-        return placeType;
-    }
+    return placeType;
+  }
 
     public void setPlaceType(PlaceType placeType) {
         this.placeType = placeType;
     }
+
 
     public static List<Place> getPlace(long uid) {
         return new Select().from(Place.class).where("place_id=?", uid).execute();
@@ -131,4 +146,17 @@ public class Place extends Model implements Serializable {
     public static int getPlaceCount(long uid) {
         return new Select().from(Place.class).where("place_id=?", uid).execute().size();
     }
+
+    public static List<Place> getPlacesByType(ArrayList<Long> placeTypes) {
+        List<Place> allplaces = new ArrayList<Place>();
+        if (placeTypes != null) {
+            List<Place> places = new ArrayList<Place>();
+            for (int i=0; i<placeTypes.size(); i++) {
+                places = new Select().from(Place.class).where("place_type=?",placeTypes.get(i).longValue()).execute();
+                allplaces.addAll(places);
+            }
+        }
+        return allplaces;
+    }
+
 }

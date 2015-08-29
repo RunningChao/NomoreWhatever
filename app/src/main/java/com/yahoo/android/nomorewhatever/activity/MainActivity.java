@@ -1,6 +1,7 @@
 package com.yahoo.android.nomorewhatever.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -55,14 +56,19 @@ public class MainActivity extends Activity {
     mConfirmBtn.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        ArrayList<PlaceType> selectedPlaces = new ArrayList<PlaceType>();
+        ArrayList<Long> selectedPlacesIds = new ArrayList<>();
 
         for(int i= 0; i < mPlaces.size(); i++){
           if(mPlaces.get(i).isFav()){
-            selectedPlaces.add(mPlaces.get(i));
+            selectedPlacesIds.add(mPlaces.get(i).getId());
+
           }
         }
-        Log.e("size", "size" + selectedPlaces.size());
+        //Log.e("size", "size" + selectedPlaces.size());
+
+        Intent intent = new Intent(MainActivity.this, PlacesActivity.class);
+        intent.putExtra("selected_places", selectedPlacesIds);
+        startActivity(intent);
       }
     });
 
