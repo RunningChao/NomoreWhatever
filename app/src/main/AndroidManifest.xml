@@ -18,14 +18,13 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/MainTheme" >
+        android:theme="@style/MainTheme">
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyCNtxd639be1o4vQ7jf-_n8-9ZbH3GTuw8" />
-
+            android:value="AIzaSyB382dKxjJ1NfTUOhu9tQ68IWDHdtC736Q" />
         <meta-data
             android:name="AA_DB_NAME"
             android:value="NoMoreWhatever.db" />
@@ -36,7 +35,7 @@
         <activity
             android:name=".activity.MainActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -46,7 +45,15 @@
         <activity
             android:name=".activity.PlaceDetailActivity"
             android:label="@string/title_activity_place_detail"
-	    android:theme="@style/DetailTheme" >
+            android:theme="@style/DetailTheme"></activity>
+        <activity
+            android:name=".activity.PlacesActivity"
+            android:label="@string/title_activity_places">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 
