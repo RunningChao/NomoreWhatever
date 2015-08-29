@@ -46,6 +46,8 @@ public class PlacesAdapter extends RecyclerView.Adapter<PlacesAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
+
+        // TODO: 8/29/15 if mPlaces size is 0
         final Place place = mPlaces.get(position);
         holder.placeName.setText(place.name);
         holder.mSelectedIv.setVisibility(mPlaces.get(position).isFav() ? View.VISIBLE : View.GONE);
@@ -76,7 +78,7 @@ public class PlacesAdapter extends RecyclerView.Adapter<PlacesAdapter.ViewHolder
     @Override
     public int getItemCount() {
         //return Place.getPlaceCount(1);
-        return 10;
+        return mPlaces.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {

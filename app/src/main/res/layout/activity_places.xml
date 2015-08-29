@@ -5,16 +5,17 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/btn_confirm"
-        android:layout_width="match_parent"
-        android:text="Lucky GO!"
-        android:layout_height="70dp" />
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:background="@color/light_gray" />
+
+    <Button
+        android:id="@+id/btn_lucky"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:text="Lucky GO!" />
 
 </LinearLayout>

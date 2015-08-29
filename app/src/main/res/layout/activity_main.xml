@@ -7,16 +7,14 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/list"
-        android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_weight="1"
         android:background="@color/light_gray" />
-
 
     <Button
         android:id="@+id/btn_confirm"
         android:layout_width="match_parent"
-        android:text="click me"
         android:layout_height="70dp"
-        />
+        android:text="Give me some ideas" />
 </LinearLayout>
