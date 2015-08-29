@@ -47,6 +47,8 @@ public class Place extends Model implements Serializable {
     @Column(name = "place_type", onUpdate = ForeignKeyAction.CASCADE, onDelete = ForeignKeyAction.CASCADE)
     public PlaceType placeType;
 
+    public double distance;
+
     public Place() {
     }
 
@@ -158,5 +160,6 @@ public class Place extends Model implements Serializable {
         }
         return allplaces;
     }
+
 
 }
