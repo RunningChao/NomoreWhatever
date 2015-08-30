@@ -43,7 +43,6 @@ public class MainActivity extends Activity {
         mStaggeredLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(mStaggeredLayoutManager);
 
-        //
         mPlaces = PlaceType.getPlaceTypes(20);
         for (int i = 0; i < mPlaces.size(); i++) {
             mPlaces.get(i).setIsFav(false);
@@ -70,25 +69,7 @@ public class MainActivity extends Activity {
                 startActivity(intent);
             }
         });
-
-    /*
-    mAdapter.setOnItemClickListener(new PlaceTypeListAdapter.OnItemClickListener() {
-
-      @Override
-      public void onItemClick(View view, int position) {
-        Toast.makeText(MainActivity.this, "Clicked " + position, Toast.LENGTH_SHORT).show();
-
-        Intent intent = new Intent(MainActivity.this, PlaceDetailActivity.class);
-        intent.putExtra(PlaceDetailActivity.EXTRA_PARAM_ID, position);
-
-        ActivityOptions options =
-                ActivityOptions.makeSceneTransitionAnimation(MainActivity.this, view, "photo_hero");
-        startActivity(intent, options.toBundle());
-      }
-    });
-    */
-
-        isListView = true;
+        isListView = false;
     }
 
     public void showPhoto(View view) {
