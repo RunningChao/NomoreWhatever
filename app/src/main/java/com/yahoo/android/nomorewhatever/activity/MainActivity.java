@@ -57,8 +57,8 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
 
-                LocationManager manager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-                System.out.println("XXXXXXXXX : " + manager.isProviderEnabled(LocationManager.GPS_PROVIDER));
+                //LocationManager manager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+                //System.out.println("XXXXXXXXX : " + manager.isProviderEnabled(LocationManager.GPS_PROVIDER));
 
                 ArrayList<Long> selectedPlacesIds = new ArrayList<>();
 
