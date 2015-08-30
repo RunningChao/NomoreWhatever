@@ -10,6 +10,7 @@ import android.support.v7.graphics.Palette;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -20,6 +21,7 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 import com.yahoo.android.nomorewhatever.R;
 import com.yahoo.android.nomorewhatever.activity.PlaceDetailActivity;
+import com.yahoo.android.nomorewhatever.activity.PlacesActivity;
 import com.yahoo.android.nomorewhatever.model.Place;
 
 import java.util.List;
@@ -88,6 +90,7 @@ public class PlacesAdapter extends RecyclerView.Adapter<PlacesAdapter.ViewHolder
         public ImageView placeImage;
         public ImageView mSelectedIv;
         public Button mDetailButton;
+        public MenuItem ami_count;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -99,6 +102,7 @@ public class PlacesAdapter extends RecyclerView.Adapter<PlacesAdapter.ViewHolder
             mSelectedIv = (ImageView) itemView.findViewById(R.id.iv_select);
             placeHolder.setOnClickListener(this);
             mDetailButton = (Button) itemView.findViewById(R.id.btn_detail);
+            ami_count=(MenuItem) itemView.findViewById(R.id.action_count);
         }
 
         @Override
@@ -112,6 +116,14 @@ public class PlacesAdapter extends RecyclerView.Adapter<PlacesAdapter.ViewHolder
             mPlaces.get(getPosition()).save();
             mSelectedIv.setVisibility(isFav ? View.VISIBLE : View.GONE);
             Log.e("isFav", mPlaces.get(getPosition()).isFav() + " : after");
+
+            // referesh count of fav
+            int original_count = Integer.parseInt(PlacesActivity.ami_count.getTitle().toString());
+            if(mPlaces.get(getPosition()).isFav()){
+                PlacesActivity.ami_count.setTitle(String.valueOf(original_count - 1));
+            }else{
+                PlacesActivity.ami_count.setTitle(String.valueOf(original_count+1));
+            }
         }
     }
 

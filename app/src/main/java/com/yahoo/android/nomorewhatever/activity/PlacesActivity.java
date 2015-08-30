@@ -15,6 +15,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.yahoo.android.nomorewhatever.R;
 import com.yahoo.android.nomorewhatever.adapter.PlacesAdapter;
@@ -42,6 +43,8 @@ public class PlacesActivity extends Activity implements LocationListener {
 
     private Location currentLocation;
 
+    public static MenuItem ami_count;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,6 +71,8 @@ public class PlacesActivity extends Activity implements LocationListener {
         mRecyclerView = (RecyclerView) findViewById(R.id.list);
         mStaggeredLayoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(mStaggeredLayoutManager);
+
+        //ami_count=(ActionMenuItemView) findViewById(R.id.action_count);
 
         /*
         for (Long placeTypeLongId : mPlaceTypeIds) {
@@ -161,8 +166,10 @@ public class PlacesActivity extends Activity implements LocationListener {
         //getMenuInflater().inflate(R.menu.menu_places, menu);
 
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_main, menu);
+        inflater.inflate(R.menu.menu_places, menu);
         this.menu = menu;
+
+        ami_count = menu.findItem(R.id.action_count);
 
         return true;
     }
@@ -228,6 +235,28 @@ public class PlacesActivity extends Activity implements LocationListener {
 
     public double getDistance(double lat1, double lng1, double lat2, double lng2) {
         return Math.sqrt((lat2-lat1)*(lat2-lat1) + (lng2-lng1)*(lng2-lng1));
+    }
+
+    public static boolean isSelectAll=false;
+    public void selectTopSixPlaces(MenuItem item) {
+        int max = mPlaces.size()<6 ? mPlaces.size() : 6;
+        for(int i = 0; i<max;i++) {
+            mPlaces.get(i).setIsFav(!isSelectAll);
+            mPlaces.get(i).save();
+            mAdapter.notifyDataSetChanged();
+        }
+        isSelectAll = !isSelectAll;
+        int count =6;
+        for(int i =0; i<mPlaces.size();i++){
+            if(mPlaces.get(i).isFav){
+                count--;
+            }
+        }
+        ami_count.setTitle(String.valueOf(count));
+    }
+
+    public void showPhoto(View view) {
+        Toast.makeText(PlacesActivity.this, "Clicked " + view.getId(), Toast.LENGTH_SHORT).show();
     }
 
 }
