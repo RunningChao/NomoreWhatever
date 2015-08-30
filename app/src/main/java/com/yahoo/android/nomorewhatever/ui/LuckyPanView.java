@@ -5,10 +5,12 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.support.v7.graphics.Palette;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.TypedValue;
@@ -51,6 +53,8 @@ public class LuckyPanView extends SurfaceView implements SurfaceHolder.Callback,
     private int mItemCount = 6;
 
     private String[] mStrs = new String[mItemCount];    //抽獎的文字
+    private int[] mColors = new int[mItemCount];        //抽獎的文字對應的顏色
+//    private int[] mImgs = new int[mItemCount];          //抽獎的文字對應的图片
     /**
      * 与文字对应的图片 todo: 換張圖吧
      */
@@ -59,39 +63,51 @@ public class LuckyPanView extends SurfaceView implements SurfaceHolder.Callback,
             R.drawable.abc_btn_radio_to_on_mtrl_015, R.drawable.abc_btn_radio_to_on_mtrl_015,
             R.drawable.abc_btn_radio_to_on_mtrl_015, R.drawable.abc_btn_radio_to_on_mtrl_015
     };
-//    private int[] mImgs = new int[mItemCount];          //抽獎的文字對應的图片
-//    private int[] mColors = new int[mItemCount];        //抽獎的文字對應的顏色
 
-//    private int[] COLOR_ENUM = new int[] {
-//            0xFFFFC300, 0xFFF17E01, 0xFFFFFF00,
-//            0x00000001, 0xFFFFC300, 0xFFF17E01
-//    };
+    /**
+     * 轉盤底色 todo:找UED配個色吧
+     */
+    private int[] COLOR_ENUM = new int[] {
+            Color.parseColor("#FF0088"), Color.parseColor("#FF5511"), Color.parseColor("#FFBB00"),
+            Color.parseColor("#00FF99"), Color.parseColor("#00BBFF"), Color.parseColor("#CC00FF")
+    };
 
     /**
      * 每个盘块的颜色
      */
-    private int[] mColors = new int[]{
-            0xFFFFC300, 0xFFF17E01, 0xFFFFC300,
-            0xFFF17E01, 0xFFFFC300, 0xFFF17E01
-    };
+//    private int[] mColors = new int[]{
+//            0xD83D0000, 0xF9A24500, 0xE82C8300,
+//            0x63BEFF00, 0x7DE88400, 0xEBEFE000
+//    };
 
     public void setPlacesonBoard(List<Place> places) {
         Log.d("Debug", String.valueOf(places.size()));
         for (int i = 0; i < places.size(); i++) {
             mStrs[i] = places.get(i).getName();
-            //mImgs[i]=places.get(i).getImageResourceId(getContext());
-            //mColors[i]=COLOR_ENUM[i];
+            mColors[i]=COLOR_ENUM[i];
+//            mImgs[i]=places.get(i).getImageResourceId(getContext());
+//            Bitmap photo = BitmapFactory.decodeResource(getContext().getResources(), places.get(i).getImageResourceId(getContext()));
+//            mColors[i]=getColor(photo);
+
         }
         if (places.size() < mItemCount) {
             for (int i = places.size(); i < mItemCount; i++) {
                 Random r = new Random();
                 int index = r.nextInt(places.size()) + 0;
                 mStrs[i] = places.get(index).getName();
-                //mImgs[i]=places.get(index).getImageResourceId(getContext());
-                //mColors[i]=COLOR_ENUM[index];
+                mColors[i]=COLOR_ENUM[index];
+//                mImgs[i]=places.get(index).getImageResourceId(getContext());
+//                Bitmap photo = BitmapFactory.decodeResource(getContext().getResources(), places.get(index).getImageResourceId(getContext()));
+//                mColors[i]=getColor(photo);
             }
         }
 
+    }
+
+    private int getColor(Bitmap photo){
+        Palette palette = Palette.generate(photo);
+        int muted = palette.getLightMutedColor(0x000000);
+        return muted;
     }
 
 
