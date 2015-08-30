@@ -1,5 +1,8 @@
 package com.yahoo.android.nomorewhatever.common;
 
+import android.content.Context;
+import android.location.LocationManager;
+
 /**
  * Created by mchsieh on 8/27/15.
  */
@@ -7,6 +10,10 @@ public class Helper {
     public static final double SCOPE = 0.5;
 
     private static final double EARTH_RADIUS = 6378137.0;
+
+    public static final double DEFAULT_LAT = 25.0339639;
+
+    public static final double DEFUALT_LNG = 121.5644722;
 
     /**
      * calc distance
@@ -28,4 +35,7 @@ public class Helper {
         s = Math.round(s * 10000) / 10000;
         return s;
     }
+
+
+
 }
