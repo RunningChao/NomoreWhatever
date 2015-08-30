@@ -237,14 +237,15 @@ public class PlacesActivity extends Activity implements LocationListener {
         return Math.sqrt((lat2-lat1)*(lat2-lat1) + (lng2-lng1)*(lng2-lng1));
     }
 
+    public static boolean isSelectAll=false;
     public void selectTopSixPlaces(MenuItem item) {
         int max = mPlaces.size()<6 ? mPlaces.size() : 6;
         for(int i = 0; i<max;i++) {
-            boolean isFav = !mPlaces.get(i).isFav();
-            mPlaces.get(i).setIsFav(isFav);
+            mPlaces.get(i).setIsFav(!isSelectAll);
             mPlaces.get(i).save();
             mAdapter.notifyDataSetChanged();
         }
+        isSelectAll = !isSelectAll;
         int count =6;
         for(int i =0; i<mPlaces.size();i++){
             if(mPlaces.get(i).isFav){
