@@ -1,7 +1,9 @@
 package com.yahoo.android.nomorewhatever.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -54,6 +56,10 @@ public class MainActivity extends Activity {
         mConfirmBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                //LocationManager manager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+                //System.out.println("XXXXXXXXX : " + manager.isProviderEnabled(LocationManager.GPS_PROVIDER));
+
                 ArrayList<Long> selectedPlacesIds = new ArrayList<>();
 
                 for (int i = 0; i < mPlaces.size(); i++) {

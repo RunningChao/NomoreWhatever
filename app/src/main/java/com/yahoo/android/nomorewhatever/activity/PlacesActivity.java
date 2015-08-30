@@ -80,8 +80,20 @@ public class PlacesActivity extends Activity implements LocationListener {
         }
         */
 
-        double curLat = currentLocation.getLatitude();
-        double curlng = currentLocation.getLongitude();
+
+        if(mPlaces == null){
+            mPlaces = new ArrayList<Place>();
+        }
+
+        double curLat = Helper.DEFAULT_LAT;
+        double curlng = Helper.DEFUALT_LNG;
+
+        if(null != currentLocation){
+            curLat = currentLocation.getLatitude();
+            curlng = currentLocation.getLongitude();
+        }
+
+
         double east = curLat + Helper.SCOPE;
         double wes = curLat - Helper.SCOPE;
         double south = curlng - Helper.SCOPE;
@@ -89,9 +101,7 @@ public class PlacesActivity extends Activity implements LocationListener {
 
 
         //mPlaces = Place.getPlacesByType(mPlaceTypeIds);
-        if(mPlaces == null){
-            mPlaces = new ArrayList<Place>();
-        }
+
 
         List<Place> tempPlaces = Place.getPlacesByLatAndLng(mPlaceTypeIds, east, wes, south, north);
         for(Place entity : tempPlaces){
@@ -108,12 +118,8 @@ public class PlacesActivity extends Activity implements LocationListener {
             }
         }
 
-
-
-
         // sort mPlaces by distances
         //mPlaces = sortingPlaceByDistance(mPlaces, currentLocation);
-
 
         for (int i = 0; i < mPlaces.size(); i++) {
             mPlaces.get(i).setIsFav(false);
