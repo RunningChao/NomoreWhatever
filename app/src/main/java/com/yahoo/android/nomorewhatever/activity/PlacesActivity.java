@@ -18,9 +18,11 @@ import android.widget.Button;
 
 import com.yahoo.android.nomorewhatever.R;
 import com.yahoo.android.nomorewhatever.adapter.PlacesAdapter;
+import com.yahoo.android.nomorewhatever.common.Helper;
 import com.yahoo.android.nomorewhatever.model.Place;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -38,28 +40,75 @@ public class PlacesActivity extends Activity implements LocationListener {
     private ArrayList<Long> mPlaceTypeIds;
     private Button mLuckyButton;
 
+    private Location currentLocation;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_places);
 
+        Intent intent = getIntent();
+        mPlaceTypeIds = (ArrayList<Long>) intent.getSerializableExtra("selected_places");
+
         /* gps testing*/
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+        currentLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        /*
+        if (location != null){
+            double lat = location.getLatitude();
+            double lng = location.getLongitude();
+
+        } else {
+
+        }
+        */
         /* gps testing*/
 
         mRecyclerView = (RecyclerView) findViewById(R.id.list);
         mStaggeredLayoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(mStaggeredLayoutManager);
 
-        Intent intent = getIntent();
-        mPlaceTypeIds = (ArrayList<Long>) intent.getSerializableExtra("selected_places");
-
+        /*
         for (Long placeTypeLongId : mPlaceTypeIds) {
             Log.d("Debug", "id: " + placeTypeLongId);
         }
+        */
 
-        mPlaces = Place.getPlacesByType(mPlaceTypeIds);
+        double curLat = currentLocation.getLatitude();
+        double curlng = currentLocation.getLongitude();
+        double east = curLat + Helper.SCOPE;
+        double wes = curLat - Helper.SCOPE;
+        double south = curlng - Helper.SCOPE;
+        double north = curlng + Helper.SCOPE;
+
+
+        //mPlaces = Place.getPlacesByType(mPlaceTypeIds);
+        if(mPlaces == null){
+            mPlaces = new ArrayList<Place>();
+        }
+
+        List<Place> tempPlaces = Place.getPlacesByLatAndLng(mPlaceTypeIds, east, wes, south, north);
+        for(Place entity : tempPlaces){
+            entity.calcDistance(curLat, curlng);
+        }
+        Collections.sort(tempPlaces, new Place());
+        int size =  tempPlaces.size();
+        if(size > 6){
+            size = 6;
+        }
+        if(size != 0){
+            for(int i=0; i<size; i++){
+                mPlaces.add(tempPlaces.get(i));
+            }
+        }
+
+
+
+
+        // sort mPlaces by distances
+        //mPlaces = sortingPlaceByDistance(mPlaces, currentLocation);
+
 
         for (int i = 0; i < mPlaces.size(); i++) {
             mPlaces.get(i).setIsFav(false);
@@ -88,6 +137,23 @@ public class PlacesActivity extends Activity implements LocationListener {
             }
         });
     }
+
+//    private List<Place> sortingPlaceByDistance(List<Place> mPlaces, Location currentLocation) {
+//        List<Place> sortedPlaces = new ArrayList<Place>();
+//        if (mPlaces !=null) {
+//            for (Place place : mPlaces) {
+//                double lat1 = place.getLat();
+//                double lng1 = place.getLng();
+//                double lat2 = currentLocation.getLatitude();
+//                double lng2 = currentLocation.getLongitude();
+//                place.distance = getDistance(lat1,lng1,lat2,lng2);
+//                sortedPlaces.add(place);
+//
+//            }
+//        }
+//        // TODO: 8/29/15 sorting  sortedPlaces by distance
+//        return sortedPlaces;
+//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -141,7 +207,7 @@ public class PlacesActivity extends Activity implements LocationListener {
         int latitude = (int) (location.getLatitude());
         int longitude = (int) (location.getLongitude());
 
-        Log.i("Geo_Location", "Latitude: " + latitude + ", Longitude: " + longitude);
+        //Log.i("Geo_Location", "Latitude: " + latitude + ", Longitude: " + longitude);
     }
 
     @Override
@@ -159,4 +225,9 @@ public class PlacesActivity extends Activity implements LocationListener {
     public void onProviderDisabled(String provider) {
         Log.d("Latitude", "disable");
     }
+
+    public double getDistance(double lat1, double lng1, double lat2, double lng2) {
+        return Math.sqrt((lat2-lat1)*(lat2-lat1) + (lng2-lng1)*(lng2-lng1));
+    }
+
 }

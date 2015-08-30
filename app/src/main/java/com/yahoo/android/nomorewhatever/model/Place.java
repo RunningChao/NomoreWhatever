@@ -7,13 +7,16 @@ import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Column.ForeignKeyAction;
 import com.activeandroid.annotation.Table;
 import com.activeandroid.query.Select;
+import com.activeandroid.util.SQLiteUtils;
+import com.yahoo.android.nomorewhatever.common.Helper;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Table(name = "Places")
-public class Place extends Model implements Serializable {
+public class Place extends Model implements Serializable, Comparator<Place> {
     @Column(name = "place_id", unique = true, onUniqueConflict = Column.ConflictAction.REPLACE)
     public long placeId;
 
@@ -46,6 +49,9 @@ public class Place extends Model implements Serializable {
 
     @Column(name = "place_type", onUpdate = ForeignKeyAction.CASCADE, onDelete = ForeignKeyAction.CASCADE)
     public PlaceType placeType;
+
+
+    public Double distance;
 
     public Place() {
     }
@@ -159,4 +165,48 @@ public class Place extends Model implements Serializable {
         return allplaces;
     }
 
+    public static List<Place> getPlacesByLatAndLng(ArrayList<Long> placeTypes, double east, double wes, double south, double north){
+//        double east = curLat + Helper.SCOPE;
+//        double wes = curLat - Helper.SCOPE;
+//        double south = curlng - Helper.SCOPE;
+//        double north = curlng + Helper.SCOPE;
+
+        List<Place> allplaces = new ArrayList<Place>();
+        if (placeTypes != null) {
+
+            String sql = "select * from Places where ( lat >= " + wes + " and lat <= " +  east + " )" +
+                    " and ( lng >=  " + south + " and lng <= " + north + " ) " +
+                    " and place_type in ( "+ listToQueryStr(placeTypes) +" )";
+
+            allplaces =  SQLiteUtils.rawQuery(Place.class, sql, new String[0]);
+
+//
+        }
+        return allplaces;
+
+
+
+    }
+
+    public void calcDistance(double srcLat, double srcLng){
+         this.distance = Helper.gps2m(srcLat, srcLng, lat, lng);
+    }
+
+    public static String listToQueryStr(ArrayList<Long> ids){
+        String id = "";
+        for(Long data : ids){
+            id += ","+data;
+        }
+        return id.substring(1);
+    }
+
+    public Double getDistance() {
+        return distance;
+    }
+
+
+    @Override
+    public int compare(Place p1, Place p2) {
+       return   p1.getDistance().compareTo(p2.getDistance());
+    }
 }
