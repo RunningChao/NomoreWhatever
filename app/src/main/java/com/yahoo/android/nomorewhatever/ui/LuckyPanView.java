@@ -68,8 +68,8 @@ public class LuckyPanView extends SurfaceView implements SurfaceHolder.Callback,
      * 轉盤底色 todo:找UED配個色吧
      */
     private int[] COLOR_ENUM = new int[] {
-            Color.parseColor("#FF0088"), Color.parseColor("#FF5511"), Color.parseColor("#FFBB00"),
-            Color.parseColor("#00FF99"), Color.parseColor("#00BBFF"), Color.parseColor("#CC00FF")
+            Color.parseColor("#e27854"), Color.parseColor("#ed9a4b"), Color.parseColor("#afdcc8"),
+            Color.parseColor("#ada683"), Color.parseColor("#b0e0e9"), Color.parseColor("#9f80b7")
     };
 
     /**

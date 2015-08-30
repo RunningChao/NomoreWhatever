@@ -4,8 +4,8 @@
 
   <item
     android:id="@+id/action_toggle"
-    android:icon="@drawable/ic_action_grid"
-    android:showAsAction="never"
+    android:icon="@drawable/ic_action_list"
+    android:showAsAction="always"
     android:orderInCategory="100"
     android:title="Show as grid" />
 
