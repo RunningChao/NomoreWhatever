@@ -18,9 +18,11 @@ import android.widget.Button;
 
 import com.yahoo.android.nomorewhatever.R;
 import com.yahoo.android.nomorewhatever.adapter.PlacesAdapter;
+import com.yahoo.android.nomorewhatever.common.Helper;
 import com.yahoo.android.nomorewhatever.model.Place;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -73,10 +75,39 @@ public class PlacesActivity extends Activity implements LocationListener {
         }
         */
 
-        mPlaces = Place.getPlacesByType(mPlaceTypeIds);
+        double curLat = currentLocation.getLatitude();
+        double curlng = currentLocation.getLongitude();
+        double east = curLat + Helper.SCOPE;
+        double wes = curLat - Helper.SCOPE;
+        double south = curlng - Helper.SCOPE;
+        double north = curlng + Helper.SCOPE;
+
+
+        //mPlaces = Place.getPlacesByType(mPlaceTypeIds);
+        if(mPlaces == null){
+            mPlaces = new ArrayList<Place>();
+        }
+
+        List<Place> tempPlaces = Place.getPlacesByLatAndLng(mPlaceTypeIds, east, wes, south, north);
+        for(Place entity : tempPlaces){
+            entity.calcDistance(curLat, curlng);
+        }
+        Collections.sort(tempPlaces, new Place());
+        int size =  tempPlaces.size();
+        if(size > 6){
+            size = 6;
+        }
+        if(size != 0){
+            for(int i=0; i<size; i++){
+                mPlaces.add(tempPlaces.get(i));
+            }
+        }
+
+
+
 
         // sort mPlaces by distances
-        mPlaces = sortingPlaceByDistance(mPlaces, currentLocation);
+        //mPlaces = sortingPlaceByDistance(mPlaces, currentLocation);
 
 
         for (int i = 0; i < mPlaces.size(); i++) {
@@ -107,22 +138,22 @@ public class PlacesActivity extends Activity implements LocationListener {
         });
     }
 
-    private List<Place> sortingPlaceByDistance(List<Place> mPlaces, Location currentLocation) {
-        List<Place> sortedPlaces = new ArrayList<Place>();
-        if (mPlaces !=null) {
-            for (Place place : mPlaces) {
-                double lat1 = place.getLat();
-                double lng1 = place.getLng();
-                double lat2 = currentLocation.getLatitude();
-                double lng2 = currentLocation.getLongitude();
-                place.distance = getDistance(lat1,lng1,lat2,lng2);
-                sortedPlaces.add(place);
-
-            }
-        }
-        // TODO: 8/29/15 sorting  sortedPlaces by distance
-        return sortedPlaces;
-    }
+//    private List<Place> sortingPlaceByDistance(List<Place> mPlaces, Location currentLocation) {
+//        List<Place> sortedPlaces = new ArrayList<Place>();
+//        if (mPlaces !=null) {
+//            for (Place place : mPlaces) {
+//                double lat1 = place.getLat();
+//                double lng1 = place.getLng();
+//                double lat2 = currentLocation.getLatitude();
+//                double lng2 = currentLocation.getLongitude();
+//                place.distance = getDistance(lat1,lng1,lat2,lng2);
+//                sortedPlaces.add(place);
+//
+//            }
+//        }
+//        // TODO: 8/29/15 sorting  sortedPlaces by distance
+//        return sortedPlaces;
+//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
