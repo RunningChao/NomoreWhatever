@@ -1,14 +1,15 @@
 package com.yahoo.android.nomorewhatever.activity;
 
 import android.app.Activity;
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
+import com.yahoo.android.nomorewhatever.MyDialogFragment;
 import com.yahoo.android.nomorewhatever.R;
 import com.yahoo.android.nomorewhatever.model.Place;
 import com.yahoo.android.nomorewhatever.ui.LuckyPanView;
@@ -21,6 +22,8 @@ public class LuckyBoardActivity extends Activity {
     private LuckyPanView mLuckyPanView;
 
     private List<Place> mPlaces;
+
+    public static Place lucky_place_today;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +40,7 @@ public class LuckyBoardActivity extends Activity {
         mLuckyPanView.setListener(new LuckyPanView.onClickLuckyPanListener() {
             @Override
             public void onClickLuckyPan(int luckyId) {
-                Toast.makeText(LuckyBoardActivity.this, "click item with id " + luckyId, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(LuckyBoardActivity.this, "click item with id " + luckyId, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -46,26 +49,40 @@ public class LuckyBoardActivity extends Activity {
             @Override
             public void onClick(View v) {
 
-                if (!mLuckyPanView.isStart()) {
-                    // TODO :change icon layout here
-                    // mStartBtn.setImageResource(R.drawable.stop);
-                    mLuckyPanView.luckyStart((int) Math.floor(Math.random() * 6));
+                int lucky_number=0;
+                if (!mLuckyPanView.isStart()) { // click run button
+                    // pick a lucky number
+                    lucky_number = (int) Math.floor(Math.random() * 6);
+                    // set lucky place
+                    lucky_place_today = mPlaces.get(LuckyPanView.placeInBoard[lucky_number]);
+                    mLuckyPanView.luckyStart(lucky_number);
+                    // set button to stop
                     mStartBtn.setText("Stop!");
-                } else {
+                } else {                        // click stop button
+                    // stop lucky pan
                     if (!mLuckyPanView.isShouldEnd()) {
                         // mStartBtn.setImageResource(R.drawable.start);
                         mLuckyPanView.luckyEnd();
                     }
+
+                    // wait lucky pan animation stop
                     try {
-                        Thread.sleep(3000); // wait animation stop
+                        Thread.sleep(3000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    mStartBtn.setText("TRY AGAIN!");
+
+                    // show dialogFragment
+                    FragmentManager fm = getFragmentManager();
+                    MyDialogFragment dialogFragment = new MyDialogFragment();
+                    dialogFragment.show(fm, String.valueOf(lucky_number));
+
+                    mStartBtn.setText("NOMORE WHATEVER!");
                 }
             }
         });
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

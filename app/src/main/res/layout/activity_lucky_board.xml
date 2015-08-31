@@ -7,6 +7,13 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+    <ImageView
+        android:background="@drawable/arrow_black"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerInParent="true"
+
+        />
     <com.yahoo.android.nomorewhatever.ui.LuckyPanView
         android:id="@+id/id_luckypan"
         android:layout_width="match_parent"

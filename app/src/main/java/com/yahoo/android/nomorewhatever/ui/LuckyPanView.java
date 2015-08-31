@@ -67,7 +67,7 @@ public class LuckyPanView extends SurfaceView implements SurfaceHolder.Callback,
     /**
      * 轉盤底色 todo:找UED配個色吧
      */
-    private int[] COLOR_ENUM = new int[] {
+    private int[] COLOR_ENUM = new int[]{
             Color.parseColor("#e27854"), Color.parseColor("#ed9a4b"), Color.parseColor("#afdcc8"),
             Color.parseColor("#ada683"), Color.parseColor("#b0e0e9"), Color.parseColor("#9f80b7")
     };
@@ -80,31 +80,38 @@ public class LuckyPanView extends SurfaceView implements SurfaceHolder.Callback,
 //            0x63BEFF00, 0x7DE88400, 0xEBEFE000
 //    };
 
+    public static Integer[] placeInBoard = new Integer[6];
+
     public void setPlacesonBoard(List<Place> places) {
+        placeInBoard = new Integer[6];
         Log.d("Debug", String.valueOf(places.size()));
         for (int i = 0; i < places.size(); i++) {
             mStrs[i] = places.get(i).getName();
-            mColors[i]=COLOR_ENUM[i];
+            mColors[i] = COLOR_ENUM[i];
 //            mImgs[i]=places.get(i).getImageResourceId(getContext());
 //            Bitmap photo = BitmapFactory.decodeResource(getContext().getResources(), places.get(i).getImageResourceId(getContext()));
 //            mColors[i]=getColor(photo);
-
+            placeInBoard[i] = i;
+            Log.d("Debug",i+":"+placeInBoard[i]);
         }
         if (places.size() < mItemCount) {
             for (int i = places.size(); i < mItemCount; i++) {
                 Random r = new Random();
-                int index = r.nextInt(places.size()) + 0;
+                //(int) Math.floor(Math.random() * 6);
+                int index = (int) Math.floor(Math.random() * places.size());
                 mStrs[i] = places.get(index).getName();
-                mColors[i]=COLOR_ENUM[index];
+                mColors[i] = COLOR_ENUM[index];
 //                mImgs[i]=places.get(index).getImageResourceId(getContext());
 //                Bitmap photo = BitmapFactory.decodeResource(getContext().getResources(), places.get(index).getImageResourceId(getContext()));
 //                mColors[i]=getColor(photo);
+                placeInBoard[i] = index;
+                Log.d("Debug",i+":"+placeInBoard[i]);
             }
         }
 
     }
 
-    private int getColor(Bitmap photo){
+    private int getColor(Bitmap photo) {
         Palette palette = Palette.generate(photo);
         int muted = palette.getLightMutedColor(0x000000);
         return muted;
@@ -360,7 +367,7 @@ public class LuckyPanView extends SurfaceView implements SurfaceHolder.Callback,
      * @param startAngle
      * @param i
      */
-    private void drawIcon(float startAngle, int i) {
+    public void drawIcon(float startAngle, int i) {
         // 设置图片的宽度为直径的1/8
         int imgWidth = mRadius / 6;
 
