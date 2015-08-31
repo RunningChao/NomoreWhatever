@@ -360,7 +360,7 @@ public class LuckyPanView extends SurfaceView implements SurfaceHolder.Callback,
      * @param startAngle
      * @param i
      */
-    private void drawIcon(float startAngle, int i) {
+    public void drawIcon(float startAngle, int i) {
         // 设置图片的宽度为直径的1/8
         int imgWidth = mRadius / 6;
 

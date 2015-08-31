@@ -1,14 +1,15 @@
 package com.yahoo.android.nomorewhatever.activity;
 
 import android.app.Activity;
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
+import com.yahoo.android.nomorewhatever.MyDialogFragment;
 import com.yahoo.android.nomorewhatever.R;
 import com.yahoo.android.nomorewhatever.model.Place;
 import com.yahoo.android.nomorewhatever.ui.LuckyPanView;
@@ -37,7 +38,7 @@ public class LuckyBoardActivity extends Activity {
         mLuckyPanView.setListener(new LuckyPanView.onClickLuckyPanListener() {
             @Override
             public void onClickLuckyPan(int luckyId) {
-                Toast.makeText(LuckyBoardActivity.this, "click item with id " + luckyId, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(LuckyBoardActivity.this, "click item with id " + luckyId, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -51,6 +52,8 @@ public class LuckyBoardActivity extends Activity {
                     // mStartBtn.setImageResource(R.drawable.stop);
                     mLuckyPanView.luckyStart((int) Math.floor(Math.random() * 6));
                     mStartBtn.setText("Stop!");
+
+
                 } else {
                     if (!mLuckyPanView.isShouldEnd()) {
                         // mStartBtn.setImageResource(R.drawable.start);
@@ -61,11 +64,19 @@ public class LuckyBoardActivity extends Activity {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    mStartBtn.setText("TRY AGAIN!");
+
+                    // show dialogFragment
+                    FragmentManager fm = getFragmentManager();
+                    MyDialogFragment dialogFragment = new MyDialogFragment ();
+                    dialogFragment.show(fm, "Your Lucky Place Today!");
+
+                    mStartBtn.setText("NOMORE WHATEVER!");
                 }
             }
         });
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
