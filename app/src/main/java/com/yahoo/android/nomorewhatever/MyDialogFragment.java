@@ -1,6 +1,7 @@
 package com.yahoo.android.nomorewhatever;
 
 import android.app.DialogFragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.yahoo.android.nomorewhatever.activity.LuckyBoardActivity;
+import com.yahoo.android.nomorewhatever.activity.PlaceDetailActivity;
 
 /**
  * Created by mchsieh on 8/31/15.
@@ -30,13 +32,19 @@ public class MyDialogFragment extends DialogFragment {
         tv_title.setText((CharSequence) LuckyBoardActivity.lucky_place_today.getName());
         // set restaruant image
         iv_place.setImageResource(LuckyBoardActivity.lucky_place_today.getImageResourceId(getActivity()));
-//        Picasso.with(getActivity())
-//                .load(LuckyBoardActivity.lucky_place_today.getImageResourceId(getActivity()))
-//                .into(iv_place);
         // set try again button
         btn_tryagain.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 getDialog().dismiss();
+            }
+        });
+        // set show detail page
+        btn_showdetail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getActivity(), PlaceDetailActivity.class);
+                i.putExtra("place_id", LuckyBoardActivity.lucky_place_today.getId());
+                startActivityForResult(i,20);
             }
         });
         return view;
