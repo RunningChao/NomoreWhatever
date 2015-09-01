@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -11,6 +12,7 @@ import android.graphics.Outline;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.RippleDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.graphics.Palette;
 import android.transition.Transition;
@@ -74,7 +76,18 @@ public class PlaceDetailActivity extends Activity {
             }
         });
 
+        ImageView infoBtn = (ImageView)findViewById(R.id.star);
+        infoBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntentDial = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + mPlace.getPhone()));
+                startActivity(myIntentDial);
+            }
+        });
+
     }
+
+
 
 
     private Bitmap setupPhoto(Bitmap bitmap) {
