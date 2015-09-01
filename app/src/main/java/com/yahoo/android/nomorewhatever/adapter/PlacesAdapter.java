@@ -31,6 +31,7 @@ import java.util.List;
  */
 public class PlacesAdapter extends RecyclerView.Adapter<PlacesAdapter.ViewHolder> {
 
+    private static final String TAG = "Debug";
     Context mContext;
     OnItemClickListener mItemClickListener;
     private List<Place> mPlaces;
@@ -70,7 +71,8 @@ public class PlacesAdapter extends RecyclerView.Adapter<PlacesAdapter.ViewHolder
             public void onClick(View v) {
                 Context context = v.getContext();
                 Intent intent = new Intent(context, PlaceDetailActivity.class);
-                intent.putExtra(PlaceDetailActivity.EXTRA_PARAM_ID, position);
+                Log.d(TAG, "onClick " + place.getName());
+                intent.putExtra(PlaceDetailActivity.EXTRA_PARAM_ID, place);
                 ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation((Activity) context, v, "photo_hero");
                 ((Activity) context).startActivity(intent, options.toBundle());
             }
