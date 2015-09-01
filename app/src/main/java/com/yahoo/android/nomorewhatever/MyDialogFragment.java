@@ -1,5 +1,6 @@
 package com.yahoo.android.nomorewhatever;
 
+import android.app.ActivityOptions;
 import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
@@ -42,9 +43,14 @@ public class MyDialogFragment extends DialogFragment {
         btn_showdetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getActivity(), PlaceDetailActivity.class);
-                i.putExtra("place_id", LuckyBoardActivity.lucky_place_today.getId());
-                startActivityForResult(i,20);
+                Intent intent = new Intent(getActivity(), PlaceDetailActivity.class);
+                intent.putExtra("place_id", LuckyBoardActivity.lucky_place_today.getId());
+
+                intent.putExtra(PlaceDetailActivity.EXTRA_PARAM_ID,  LuckyBoardActivity.lucky_place_today);
+                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(getActivity(), v, "photo_hero");
+                (getActivity()).startActivity(intent, options.toBundle());
+
+                //startActivityForResult(intent, 20);
             }
         });
         return view;
