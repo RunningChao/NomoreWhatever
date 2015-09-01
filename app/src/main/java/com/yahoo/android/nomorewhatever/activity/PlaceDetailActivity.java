@@ -64,7 +64,7 @@ public class PlaceDetailActivity extends Activity {
             public void onTransitionEnd(Transition transition) {
                 ImageView hero = (ImageView) findViewById(R.id.photo);
                 ObjectAnimator color = ObjectAnimator.ofArgb(hero.getDrawable(), "tint",
-                        getResources().getColor(R.color.photo_tint), 0);
+                        getResources().getColor(R.color.photo_dark), 0);
                 color.start();
 
                 findViewById(R.id.info).animate().alpha(1.0f);
