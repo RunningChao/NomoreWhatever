@@ -152,7 +152,7 @@ public class PlaceDetailActivity extends Activity {
         titleView.setText(mPlace.getName());
 
         TextView descriptionView = (TextView) findViewById(R.id.description);
-        descriptionView.setText(mPlace.getName());
+        descriptionView.setText(mPlace.getDesciption());
     }
 
     private void setOutlines(int star, int info) {
