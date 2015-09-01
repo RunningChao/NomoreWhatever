@@ -40,8 +40,10 @@
                 android:gravity="left"
                 android:paddingLeft="10dp"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@android:color/white" />
-
+                android:textColor="@android:color/white"
+                android:ellipsize="end"
+                android:singleLine="true"
+                />
 
         </LinearLayout>
 
