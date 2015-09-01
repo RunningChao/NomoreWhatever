@@ -9,5 +9,6 @@
   <color name="photo_tint">#00000000</color>
   <color name="photo_dark">#7f101010</color>
   <color name="button_pink">#FF0080</color>
+  <color name="button_tiffany_blue">#cc0abab5</color>
   <color name="button_blue">#1E90FF</color>
 </resources>
