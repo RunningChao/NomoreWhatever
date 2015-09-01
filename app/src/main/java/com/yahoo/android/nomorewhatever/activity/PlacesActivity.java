@@ -57,29 +57,11 @@ public class PlacesActivity extends Activity implements LocationListener {
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
         currentLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        /*
-        if (location != null){
-            double lat = location.getLatitude();
-            double lng = location.getLongitude();
-
-        } else {
-
-        }
-        */
         /* gps testing*/
 
         mRecyclerView = (RecyclerView) findViewById(R.id.list);
         mStaggeredLayoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(mStaggeredLayoutManager);
-
-        //ami_count=(ActionMenuItemView) findViewById(R.id.action_count);
-
-        /*
-        for (Long placeTypeLongId : mPlaceTypeIds) {
-            Log.d("Debug", "id: " + placeTypeLongId);
-        }
-        */
-
 
         if(mPlaces == null){
             mPlaces = new ArrayList<Place>();
@@ -92,7 +74,6 @@ public class PlacesActivity extends Activity implements LocationListener {
             curLat = currentLocation.getLatitude();
             curlng = currentLocation.getLongitude();
         }
-
 
         double east = curLat + Helper.SCOPE;
         double wes = curLat - Helper.SCOPE;

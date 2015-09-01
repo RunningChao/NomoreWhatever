@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.support.v7.graphics.Palette;
 import android.transition.Transition;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,20 +34,19 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.yahoo.android.nomorewhatever.R;
 import com.yahoo.android.nomorewhatever.model.Place;
-import com.yahoo.android.nomorewhatever.model.PlaceData;
 import com.yahoo.android.nomorewhatever.ui.TransitionAdapter;
 
 public class PlaceDetailActivity extends Activity {
-    public static final String EXTRA_PARAM_ID = "place_id";
-    private Place mPlace;
+    public static final String EXTRA_PARAM_ID = "place";
+    private static final String TAG = "Debug" ;
+    private Place mPlace =new Place();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_place_detail);
 
-        //
-        //Bitmap photo = setupPhoto(getIntent().getIntExtra("photo", R.drawable.canada));
-        mPlace = PlaceData.placeList().get(getIntent().getIntExtra(EXTRA_PARAM_ID, 0));
+        mPlace = (Place) getIntent().getSerializableExtra(EXTRA_PARAM_ID);
+        Log.d(TAG, "onClick " + mPlace.getName());
         Bitmap photo = BitmapFactory.decodeResource(getResources(), mPlace.getImageResourceId(this));
         photo = setupPhoto(photo);
 

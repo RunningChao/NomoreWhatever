@@ -145,8 +145,8 @@ public class Place extends Model implements Serializable, Comparator<Place> {
     }
 
 
-    public static List<Place> getPlace(long uid) {
-        return new Select().from(Place.class).where("place_id=?", uid).execute();
+    public static Place getPlace(long uid) {
+        return new Select().from(Place.class).where("place_id=?", uid).executeSingle();
     }
 
     public static int getPlaceCount(long uid) {
