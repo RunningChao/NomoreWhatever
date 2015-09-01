@@ -1,6 +1,8 @@
 package com.yahoo.android.nomorewhatever.adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v7.graphics.Palette;
@@ -16,8 +18,10 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.yahoo.android.nomorewhatever.R;
+import com.yahoo.android.nomorewhatever.activity.PlacesActivity;
 import com.yahoo.android.nomorewhatever.model.PlaceType;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,7 +32,6 @@ public class PlaceTypeListAdapter extends RecyclerView.Adapter<PlaceTypeListAdap
     Context mContext;
     OnItemClickListener mItemClickListener;
     private List<PlaceType> mPlaceTypes;
-
 
     public PlaceTypeListAdapter(List<PlaceType> mPlaceTypes, Context mContext) {
         this.mPlaceTypes = mPlaceTypes;
@@ -82,6 +85,20 @@ public class PlaceTypeListAdapter extends RecyclerView.Adapter<PlaceTypeListAdap
             placeHolder.setOnClickListener(this);
             mDetailButton = (Button) itemView.findViewById(R.id.btn_detail);
             mDetailButton.setVisibility(View.GONE);
+
+            placeName.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v){
+                    Context context = v.getContext();
+                    ArrayList<Long> selectedPlacesIds = new ArrayList<>();
+                    selectedPlacesIds.add(mPlaceTypes.get(getPosition()).getId());
+                    Intent intent = new Intent(context, PlacesActivity.class);
+                    intent.putExtra("selected_places", selectedPlacesIds);
+                    ((Activity) context).startActivity(intent);
+                }
+            });
+
+
         }
 
         @Override
@@ -89,7 +106,6 @@ public class PlaceTypeListAdapter extends RecyclerView.Adapter<PlaceTypeListAdap
             if (mItemClickListener != null) {
                 mItemClickListener.onItemClick(itemView, getPosition());
             }
-
 
             Log.e("isFav", mPlaceTypes.get(getPosition()).isFav() + " : before" + " " + getPosition());
             boolean isFav = !mPlaceTypes.get(getPosition()).isFav();
@@ -102,6 +118,7 @@ public class PlaceTypeListAdapter extends RecyclerView.Adapter<PlaceTypeListAdap
 
     public interface OnItemClickListener {
         void onItemClick(View view, int position);
+
     }
 
     public void setOnItemClickListener(final OnItemClickListener mItemClickListener) {

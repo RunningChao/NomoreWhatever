@@ -1,21 +1,25 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+
     tools:context=".MainActivity">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/list"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="match_parent"
+
         android:background="@color/light_gray" />
 
     <Button
         android:id="@+id/btn_lucky"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:text="Lucky GO!" />
+        android:text="Lucky GO!"
+        android:textSize="20sp"
+        android:background="@color/button_tiffany_blue"
+        android:textColor="@color/primary"
+        android:layout_gravity="bottom"/>
 
-</LinearLayout>
+</FrameLayout>

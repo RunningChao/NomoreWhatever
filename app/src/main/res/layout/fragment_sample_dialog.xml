@@ -19,7 +19,6 @@
         android:id="@+id/iv_place"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-
         />
 
     <Button
@@ -27,6 +26,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Try Again"
+        android:background="@color/button_pink"
+        android:textColor="@color/primary"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
 
         />
     <Button
@@ -34,5 +39,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Show Detail"
+        android:background="@color/button_blue"
+        android:textColor="@color/primary"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         />
 </LinearLayout>

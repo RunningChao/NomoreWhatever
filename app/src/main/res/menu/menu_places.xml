@@ -1,6 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.yahoo.android.nomorewhatever.activity.PlacesActivity">
+    tools:context="com.yahoo.android.nomorewhatever.activity.PlacesActivity"
+    >
     <item
         android:id="@+id/action_selectAll"
         android:icon="@drawable/select_all"
@@ -15,7 +16,7 @@
         />
     <item
         android:id="@+id/action_toggle"
-        android:icon="@drawable/ic_action_grid"
+        android:icon="@drawable/grid"
         android:showAsAction="always"
         android:orderInCategory="0"
         android:title="Show as grid" />
