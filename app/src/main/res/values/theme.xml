@@ -33,6 +33,7 @@
         <item name="android:actionBarStyle">@style/MainActionBar</item>
         <item name="android:windowActionBarOverlay">false</item>
         <item name="android:windowContentOverlay">@null</item>
+        <item name="android:actionMenuTextColor">#ffffff</item>
     </style>
 
     <style name="MainActionBar" parent="android:Widget.Material.Light.ActionBar">
