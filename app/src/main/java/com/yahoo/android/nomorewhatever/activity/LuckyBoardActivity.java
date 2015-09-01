@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,7 +32,7 @@ public class LuckyBoardActivity extends Activity {
 
         Intent intent = getIntent();
         mPlaces = (List<Place>) intent.getSerializableExtra("selected_places");
-Log.d("Debug", "id:" + mPlaces.get(0).getId());
+
         mLuckyPanView = (LuckyPanView) findViewById(R.id.id_luckypan);
         mLuckyPanView.setPlacesonBoard(mPlaces);
 
