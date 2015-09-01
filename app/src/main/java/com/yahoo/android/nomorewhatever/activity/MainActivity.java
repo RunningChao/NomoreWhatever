@@ -30,7 +30,7 @@ public class MainActivity extends Activity {
 
     private PlaceTypeListAdapter mAdapter;
 
-    private List<PlaceType> mPlaces;
+    private List<PlaceType> mPlaceTypes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,26 +42,21 @@ public class MainActivity extends Activity {
         mStaggeredLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(mStaggeredLayoutManager);
 
-        mPlaces = PlaceType.getPlaceTypes(20);
-        for (int i = 0; i < mPlaces.size(); i++) {
-            mPlaces.get(i).setIsFav(false);
-            mPlaces.get(i).save();
+        mPlaceTypes = PlaceType.getPlaceTypes(20);
+        for (int i = 0; i < mPlaceTypes.size(); i++) {
+            mPlaceTypes.get(i).setIsFav(false);
+            mPlaceTypes.get(i).save();
         }
-        mAdapter = new PlaceTypeListAdapter(mPlaces, this);
+        mAdapter = new PlaceTypeListAdapter(mPlaceTypes, this);
         mRecyclerView.setAdapter(mAdapter);
 
         mConfirmBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                //LocationManager manager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-                //System.out.println("XXXXXXXXX : " + manager.isProviderEnabled(LocationManager.GPS_PROVIDER));
-
                 ArrayList<Long> selectedPlacesIds = new ArrayList<>();
-
-                for (int i = 0; i < mPlaces.size(); i++) {
-                    if (mPlaces.get(i).isFav()) {
-                        selectedPlacesIds.add(mPlaces.get(i).getId());
+                for (int i = 0; i < mPlaceTypes.size(); i++) {
+                    if (mPlaceTypes.get(i).isFav()) {
+                        selectedPlacesIds.add(mPlaceTypes.get(i).getId());
 
                     }
                 }
@@ -77,6 +72,12 @@ public class MainActivity extends Activity {
 
     public void showPhoto(View view) {
         //Toast.makeText(MainActivity.this, "Clicked " + view.getId(), Toast.LENGTH_SHORT).show();
+
+//        ArrayList<Long> selectedPlacesIds = new ArrayList<>();
+//        selectedPlacesIds.add(mPlaces.get(0).getId());
+//        Intent intent = new Intent(MainActivity.this, PlacesActivity.class);
+//        intent.putExtra("selected_places", selectedPlacesIds);
+//        startActivity(intent);
     }
 
 
