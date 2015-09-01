@@ -41,7 +41,7 @@ import com.yahoo.android.nomorewhatever.ui.TransitionAdapter;
 public class PlaceDetailActivity extends Activity {
     public static final String EXTRA_PARAM_ID = "place";
     private static final String TAG = "Debug" ;
-    private Place mPlace =new Place();
+    private Place mPlace;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,8 +99,8 @@ public class PlaceDetailActivity extends Activity {
     private void setupMap() {
         GoogleMap map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
 
-        double lat = getIntent().getDoubleExtra("lat", 37.6329946);
-        double lng = getIntent().getDoubleExtra("lng", -122.4938344);
+        double lat = mPlace.getLat();
+        double lng = mPlace.getLng();
         float zoom = getIntent().getFloatExtra("zoom", 15.0f);
 
         LatLng position = new LatLng(lat, lng);
