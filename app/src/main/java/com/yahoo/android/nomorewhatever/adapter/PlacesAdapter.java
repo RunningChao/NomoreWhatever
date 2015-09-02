@@ -54,7 +54,7 @@ public class PlacesAdapter extends RecyclerView.Adapter<PlacesAdapter.ViewHolder
         final Place place = mPlaces.get(position);
         holder.placeName.setText(place.name);
         holder.mSelectedIv.setVisibility(mPlaces.get(position).isFav() ? View.VISIBLE : View.GONE);
-        Picasso.with(mContext).load(place.getImageResourceId(mContext)).into(holder.placeImage);
+        Picasso.with(mContext).load(place.getImageResourceId(mContext)).fit().centerCrop().into(holder.placeImage);
 
         Bitmap photo = BitmapFactory.decodeResource(mContext.getResources(), place.getImageResourceId(mContext));
 
