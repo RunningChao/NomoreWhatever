@@ -94,11 +94,11 @@
                     android:name="com.google.android.gms.maps.MapFragment"
 
                     tools:ignore="MissingPrefix"
-                    map:uiRotateGestures="false"
-                    map:uiScrollGestures="false"
-                    map:uiTiltGestures="false"
-                    map:uiZoomControls="false"
-                    map:uiZoomGestures="false" />
+                    map:uiRotateGestures="true"
+                    map:uiScrollGestures="true"
+                    map:uiTiltGestures="true"
+                    map:uiZoomControls="true"
+                    map:uiZoomGestures="true" />
 
             </FrameLayout>
 

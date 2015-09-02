@@ -41,7 +41,7 @@ import com.yahoo.android.nomorewhatever.ui.TransitionAdapter;
 public class PlaceDetailActivity extends Activity {
     public static final String EXTRA_PARAM_ID = "place";
     private static final String TAG = "Debug" ;
-    private Place mPlace;
+    private Place mPlace =new Place();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,7 +66,7 @@ public class PlaceDetailActivity extends Activity {
             public void onTransitionEnd(Transition transition) {
                 ImageView hero = (ImageView) findViewById(R.id.photo);
                 ObjectAnimator color = ObjectAnimator.ofArgb(hero.getDrawable(), "tint",
-                        getResources().getColor(R.color.photo_dark), 0);
+                        getResources().getColor(R.color.photo_tint), 0);
                 color.start();
 
                 findViewById(R.id.info).animate().alpha(1.0f);
@@ -99,13 +99,14 @@ public class PlaceDetailActivity extends Activity {
     private void setupMap() {
         GoogleMap map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
 
-        double lat = mPlace.getLat();
-        double lng = mPlace.getLng();
+        double lat = getIntent().getDoubleExtra("lat", 37.6329946);
+        double lng = getIntent().getDoubleExtra("lng", -122.4938344);
         float zoom = getIntent().getFloatExtra("zoom", 15.0f);
 
         LatLng position = new LatLng(lat, lng);
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(position, zoom));
         map.addMarker(new MarkerOptions().position(position));
+        map.setBuildingsEnabled(true);
     }
 
 
@@ -152,7 +153,7 @@ public class PlaceDetailActivity extends Activity {
         titleView.setText(mPlace.getName());
 
         TextView descriptionView = (TextView) findViewById(R.id.description);
-        descriptionView.setText(mPlace.getDesciption());
+        descriptionView.setText(mPlace.getName());
     }
 
     private void setOutlines(int star, int info) {
