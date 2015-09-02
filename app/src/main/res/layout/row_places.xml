@@ -9,6 +9,7 @@
     card_view:cardElevation="@dimen/card_elevation">
 
     <com.yahoo.android.nomorewhatever.ui.CardFrameLayout style="@style/Card">
+
         <ImageView
             android:id="@+id/placeImage"
             style="@style/CardPhoto"
@@ -25,45 +26,54 @@
             android:orientation="horizontal" />
 
         <LinearLayout
-            android:id="@+id/placeNameHolder"
+            android:id="@+id/bar"
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:layout_gravity="bottom"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_gravity="bottom">
 
-            <TextView
-                android:id="@+id/placeName"
-                style="@style/CardTitle"
+            <LinearLayout
+                android:id="@+id/placeNameHolder"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:gravity="left"
-                android:paddingLeft="10dp"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@android:color/white"
-                android:ellipsize="end"
-                android:singleLine="true"
-                />
+                android:layout_height="45dp"
 
-        </LinearLayout>
+                android:layout_weight="1"
+                android:orientation="horizontal">
 
-        <LinearLayout android:id="@+id/detailHolder"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_gravity="bottom"
-            android:orientation="vertical" >
+                <TextView
+                    android:id="@+id/placeName"
+                    style="@style/CardTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:ellipsize="end"
+                    android:gravity="left"
+                    android:paddingLeft="10dp"
+                    android:singleLine="true"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
-            <Button
-                android:id="@+id/btn_detail"
-                android:layout_marginTop="20px"
-                android:layout_marginRight="20px"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center|right"
-                android:background="@drawable/arrow"
-                />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/detailHolder"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:layout_gravity="bottom"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/btn_detail"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center|right"
+                    android:layout_marginRight="20px"
+                    android:layout_marginTop="20px"
+                    android:background="@drawable/arrow" />
+            </LinearLayout>
+
         </LinearLayout>
 
         <ImageView
