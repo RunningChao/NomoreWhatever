@@ -68,7 +68,7 @@
                 android:alpha="0.0"
 
                 android:background="@drawable/info_background"
-                android:src="@drawable/ic_star"
+                android:src="@drawable/phone"
 
                 android:elevation="4dp"
                 android:stateListAnimator="@anim/button_raise"
