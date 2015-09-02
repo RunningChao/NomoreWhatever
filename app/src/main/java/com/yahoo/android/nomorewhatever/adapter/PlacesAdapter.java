@@ -61,7 +61,7 @@ public class PlacesAdapter extends RecyclerView.Adapter<PlacesAdapter.ViewHolder
         Palette.generateAsync(photo, new Palette.PaletteAsyncListener() {
             public void onGenerated(Palette palette) {
                 int mutedLight = palette.getMutedColor(mContext.getResources().getColor(android.R.color.black));
-                holder.placeNameHolder.setBackgroundColor(mutedLight);
+                holder.barHolder.setBackgroundColor(mutedLight);
             }
         });
 
@@ -93,11 +93,13 @@ public class PlacesAdapter extends RecyclerView.Adapter<PlacesAdapter.ViewHolder
         public ImageView mSelectedIv;
         public Button mDetailButton;
         public MenuItem ami_count;
+        public LinearLayout barHolder;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
             placeHolder = (LinearLayout) itemView.findViewById(R.id.mainHolder);
+            barHolder = (LinearLayout) itemView.findViewById(R.id.bar);
             placeName = (TextView) itemView.findViewById(R.id.placeName);
             placeNameHolder = (LinearLayout) itemView.findViewById(R.id.placeNameHolder);
             placeImage = (ImageView) itemView.findViewById(R.id.placeImage);
