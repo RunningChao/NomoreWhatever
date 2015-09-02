@@ -25,6 +25,8 @@ import com.yahoo.android.nomorewhatever.activity.PlaceDetailActivity;
 import com.yahoo.android.nomorewhatever.activity.PlacesActivity;
 import com.yahoo.android.nomorewhatever.model.Place;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -79,6 +81,19 @@ public class PlacesAdapter extends RecyclerView.Adapter<PlacesAdapter.ViewHolder
                 ((Activity) context).startActivity(intent, options.toBundle());
             }
         });
+
+        holder.placeName.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Context context = v.getContext();
+                Intent intent = new Intent(context, PlaceDetailActivity.class);
+                Log.d(TAG, "onClick " + place.getName());
+                intent.putExtra(PlaceDetailActivity.EXTRA_PARAM_ID, place);
+                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation((Activity) context, v, "photo_hero");
+                ((Activity) context).startActivity(intent, options.toBundle());
+            }
+        });
+
     }
 
     @Override
@@ -109,6 +124,8 @@ public class PlacesAdapter extends RecyclerView.Adapter<PlacesAdapter.ViewHolder
             placeHolder.setOnClickListener(this);
             mDetailButton = (Button) itemView.findViewById(R.id.btn_detail);
             ami_count=(MenuItem) itemView.findViewById(R.id.action_count);
+
+
         }
 
         @Override
